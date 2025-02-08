@@ -19,7 +19,7 @@ MonoBehaviour:
   Required_Stamina: 8
   Unlock_Ability_Requirement:
   - AbilityId: Ability_Math
-    LevelRequirement: 3
+    LevelRequirement: 2
   Item_Requirements: []
   Activity_Outcome_Exp:
   - AbilityId: Ability_Physics

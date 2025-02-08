@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     
     public float Player_Money;      // 玩家拥有的金钱数 
 
-    public float Player_Stamina;     // 玩家体力值
-    public float Player_Stamina_Max;    // 玩家体力值上限
+    public float Player_Stamina { get; private set; } // 玩家体力值
+    public float Player_Stamina_Max { get; private set; } // 玩家体力值上限
     
     public Dictionary<string, Ability> Player_Ability;    // 玩家的能力值
     public Dictionary<string, int> Player_Inventory;     // 玩家拥有的 Item (Inventory)
@@ -44,10 +44,51 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Set_Player_Stamina();
-        Set_Player_Money();
+        Change_Player_Stamina_Max(1000);
+        Change_Player_Stamina(700);
     }
 
+    
+    
+    
+    ////////////////////////     玩家状态参数变更方法
+    
+    
+    public void Change_Player_Stamina(float stamina_change_amount)
+    {
+        Player_Stamina += stamina_change_amount;
+    }
+    
+    public void Change_Player_Stamina_Max(float stamina_max_change_amount)
+    {
+        Player_Stamina_Max += stamina_max_change_amount;
+
+        if (Player_Stamina > Player_Stamina_Max)        // 若此时玩家体力值大于上限，则将体力值设置为上限值
+            Player_Stamina = Player_Stamina_Max;
+    }
+
+    public void Change_Player_Money(float money_change_amount)
+    {
+        Player_Money += money_change_amount;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     ////////////////////////     游戏数据初始化 - 加载 Scriptable Object 和 JSON
     
@@ -91,17 +132,14 @@ public class GameManager : MonoBehaviour
         Debug.Log($"已加载{Player_Ability.Count}项能力");
     }
 
+    
+    
+    
+    
+    
+    
 
-    private void Set_Player_Stamina()
-    {
-        Player_Stamina_Max = 1000;
-        Player_Stamina = 800;
-    }
-
-    public void Set_Player_Money()
-    {
-        Player_Money = 102;
-    }
+    
     
     
     

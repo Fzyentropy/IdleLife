@@ -11,7 +11,7 @@ public abstract class Activity
     public string Activity_Type;
     public float Activity_Duration;     // 单次活动持续时间
 
-    public float Required_Stamina;
+    public float Required_Stamina;      // 体力值消耗 /秒
 
     public Dictionary<string, int> Unlock_Ability_Requirement;  // 解锁活动所需的能力值
     public Dictionary<string, int> Activity_Requirements;   // 活动所需 Item
@@ -37,6 +37,10 @@ public abstract class Activity
 
     public virtual bool Can_Start_Activity()  // 是否可以开始活动，即所需Item是否足够的判定，子类可加入自适应判定
     {
+
+        if (GameManager.GM.Player_Stamina < Required_Stamina)
+            return false;
+        
         if (Activity_Requirements.Count == 0)
             return true;
 
@@ -56,6 +60,9 @@ public abstract class Activity
         // TODO 加入判定：首先判断这次 Tick 是否成功，若仓库已满，或者其他原因，而不成功 ———— 则不会消耗资源也不会产出资源，且活动停止
         // 有可能另起一个方法判定
 
+        
+        GameManager.GM.Change_Player_Stamina(-Required_Stamina);        // 消耗体力值
+        
 
         if (Activity_Requirements.Count > 0)    // 结算 Item 消耗
         {
