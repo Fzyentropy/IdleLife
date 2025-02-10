@@ -58,7 +58,7 @@ public class ActivityManager : MonoBehaviour
         var act = current_activity;     // 赋值当前 Activity
         tick_interval = act.Activity_Duration;   // 设置此协程的单次 Tick 时长
         current_interval = 0;     // 累计当前进度
-        float elapsed_time = 0.05f;     // 单次计算单位，也表示精度
+        float elapsed_time = 0.01f;     // 单次计算单位，也表示精度
         
 
         while (act == current_activity && act.Can_Start_Activity())   // Tick 循环 Loop
@@ -78,14 +78,15 @@ public class ActivityManager : MonoBehaviour
             
             // 这里有可能会因为运行时间差而产生bug（资源通过Outcome_Tick更新前就进入了下一个循环），先记下
         }
-        
+
+        current_interval = 0;
+        Debug.Log("协程已结束");
         yield break;
     }
 
     // 停止活动方法
     public void StopCurrentActivity()
     {
-        current_interval = 0;
         Current_Activity = null;
     }
 
@@ -126,6 +127,33 @@ public class ActivityManager : MonoBehaviour
             try
             {
                 var activity = new Activity_Study()
+                {
+                    Activity_Id = activityInstance.Activity_Id,
+                    Activity_Label = activityInstance.Activity_Label,
+                    Activity_Type = activityInstance.Activity_Type,
+                    Activity_Duration = activityInstance.Activity_Duration,
+                    Required_Stamina = activityInstance.Required_Stamina,
+
+                    Unlock_Ability_Requirement =
+                        ConvertToAbilityRequirementDictionary(activityInstance.Unlock_Ability_Requirement),
+                    Activity_Requirements = ConvertToItemDictionary(activityInstance.Item_Requirements),
+                    Activity_Outcome_Exp = ConvertToExpDictionary(activityInstance.Activity_Outcome_Exp),
+                    Activity_Outcome_Item = ConvertToItemDictionary(activityInstance.Activity_Outcome_Item)
+                };
+                return activity;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"加载活动{activityInstance.Activity_Id}失败: {e.Message}");
+                return null;
+            }
+        }
+        
+        if (activityInstance.Activity_Type == "Job")
+        {
+            try
+            {
+                var activity = new Activity_Job()
                 {
                     Activity_Id = activityInstance.Activity_Id,
                     Activity_Label = activityInstance.Activity_Label,

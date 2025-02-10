@@ -17,11 +17,35 @@ public class AbilityPanelUI : MonoBehaviour
     [SerializeField] private TMP_Text _physicsLevel;
     [SerializeField] private TMP_Text _physicsExp;
     [SerializeField] private Slider _physicsProgress;
+    
+    [Header("图片编辑UI")]
+    [SerializeField] private TMP_Text _imageCraftingLevel;
+    [SerializeField] private TMP_Text _imageCraftingExp;
+    [SerializeField] private Slider _imageCraftingProgress;
+    
+    [Header("审美UI")]
+    [SerializeField] private TMP_Text _aestheticLevel;
+    [SerializeField] private TMP_Text _aestheticExp;
+    [SerializeField] private Slider _aestheticProgress;
+    
+    [Header("通用计算机UI")]
+    [SerializeField] private TMP_Text _generalComputerLevel;
+    [SerializeField] private TMP_Text _generalComputerExp;
+    [SerializeField] private Slider _generalComputerProgress;
+    
+    [Header("绘画UI")]
+    [SerializeField] private TMP_Text _drawingLevel;
+    [SerializeField] private TMP_Text _drawingExp;
+    [SerializeField] private Slider _drawingProgress;
 
     private void Start()
     {
         BindAbility("Ability_Math", _mathLevel, _mathExp, _mathProgress);
         BindAbility("Ability_Physics", _physicsLevel, _physicsExp, _physicsProgress);
+        BindAbility("Ability_ImageCrafting", _imageCraftingLevel, _imageCraftingExp, _imageCraftingProgress);
+        BindAbility("Ability_Aesthetic", _aestheticLevel, _aestheticExp, _aestheticProgress);
+        BindAbility("Ability_GeneralComputer", _generalComputerLevel, _generalComputerExp, _generalComputerProgress);
+        BindAbility("Ability_Drawing", _drawingLevel, _drawingExp, _drawingProgress);
     }
 
     private void BindAbility(string abilityId, TMP_Text levelText, TMP_Text expText, Slider progress)

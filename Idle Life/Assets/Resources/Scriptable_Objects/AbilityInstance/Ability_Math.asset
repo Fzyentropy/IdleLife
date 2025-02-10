@@ -16,9 +16,9 @@ MonoBehaviour:
   Ability_Label: Math
   LevelUp_Exp_Requirements:
   - Level: 1
-    ExpRequirement: 10
+    ExpRequirement: 5
   - Level: 2
-    ExpRequirement: 50
+    ExpRequirement: 25
   - Level: 3
     ExpRequirement: 120
   - Level: 4

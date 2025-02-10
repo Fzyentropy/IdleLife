@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d53b76a26fe5f4ea3db19bb6abab0d, type: 3}
-  m_Name: Ability_Physics
+  m_Name: Ability_Aesthetic
   m_EditorClassIdentifier: 
-  Ability_Id: Ability_Physics
-  Ability_Label: Physics
+  Ability_Id: Ability_Aesthetic
+  Ability_Label: Aesthetic
   LevelUp_Exp_Requirements:
   - Level: 1
     ExpRequirement: 5
   - Level: 2
-    ExpRequirement: 50
+    ExpRequirement: 25
   - Level: 3
-    ExpRequirement: 120
+    ExpRequirement: 50
   - Level: 4
     ExpRequirement: 300
   - Level: 5
