@@ -13,6 +13,7 @@ public class Activity_Data_Scriptable : ScriptableObject
     public string Activity_Type;    // 所属活动类型
     public float Activity_Duration; // 单次训练时间
     public float Required_Stamina;    // 所需体力值
+    public float Outcome_Money;     // 产出金钱
     
     public List<Ability_Level> Unlock_Ability_Requirement;  // 解锁训练所需的能力值等级
     public List<Item_Amount> Item_Requirements;   // 训练所需原料物品

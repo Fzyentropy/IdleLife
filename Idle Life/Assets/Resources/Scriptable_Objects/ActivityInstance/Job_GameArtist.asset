@@ -17,6 +17,7 @@ MonoBehaviour:
   Activity_Type: Job
   Activity_Duration: 10
   Required_Stamina: 20
+  Outcome_Money: 50
   Unlock_Ability_Requirement:
   - AbilityId: Ability_ImageCrafting
     LevelRequirement: 3

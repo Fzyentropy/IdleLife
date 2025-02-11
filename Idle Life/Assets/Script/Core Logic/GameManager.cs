@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public float Player_Stamina { get; private set; } // 玩家体力值
     public float Player_Stamina_Max { get; private set; } // 玩家体力值上限
+    public float Player_Stamina_Restore_Rate = 1f;
     
     public Dictionary<string, Ability> Player_Ability;    // 玩家的能力值
     public Dictionary<string, int> Player_Inventory;     // 玩家拥有的 Item (Inventory)

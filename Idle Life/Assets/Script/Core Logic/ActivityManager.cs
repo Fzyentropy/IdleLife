@@ -33,6 +33,7 @@ public class ActivityManager : MonoBehaviour
 
     public float tick_interval;     // 当前活动单次 Tick 总时长
     public float current_interval;  // 当次 Tick 所经过的时长
+    public float tick_speed = 1f;   // Tick的速度
     
     ////// 所有配置、路径参数
     
@@ -66,7 +67,7 @@ public class ActivityManager : MonoBehaviour
             if (current_interval < tick_interval)
             {
                 yield return new WaitForSeconds(elapsed_time);
-                current_interval += elapsed_time;                   ///////////////  此处可进行时间控制
+                current_interval += elapsed_time * tick_speed;                   ///////////////  此处可进行时间控制
             }
             else
             {
@@ -160,6 +161,7 @@ public class ActivityManager : MonoBehaviour
                     Activity_Type = activityInstance.Activity_Type,
                     Activity_Duration = activityInstance.Activity_Duration,
                     Required_Stamina = activityInstance.Required_Stamina,
+                    Job_Salary = activityInstance.Outcome_Money,
 
                     Unlock_Ability_Requirement =
                         ConvertToAbilityRequirementDictionary(activityInstance.Unlock_Ability_Requirement),

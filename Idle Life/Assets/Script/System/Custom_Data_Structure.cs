@@ -31,3 +31,15 @@ public class Ability_LevelUp_Exp_Requirement   /////// 对 Ability，Ability 升
     public int Level;
     public float ExpRequirement;
 }
+
+
+
+public enum Ability_Types
+{
+    Math,
+    Physics,
+    Aesthetic,
+    GeneralComputer,
+    ImageCrafting,
+    Drawing
+}
