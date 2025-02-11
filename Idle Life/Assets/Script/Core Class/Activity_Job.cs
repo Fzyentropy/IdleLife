@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Activity_Job : Activity
 {
+    [Header("Job专属数据")]
     public float Job_Salary;
 
     public override void Activity_Outcome_Tick()

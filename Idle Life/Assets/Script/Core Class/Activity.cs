@@ -6,11 +6,13 @@ using UnityEngine;
 
 public abstract class Activity
 {
+    [Header("基础信息")]
     public string Activity_Id;        // 活动名称 
     public string Activity_Label;
     public string Activity_Type;
-    public float Activity_Duration;     // 单次活动持续时间
-
+    
+    [Header("活动数据")]
+    public float Activity_Duration;     // 单次活动持续时间 x秒
     public float Required_Stamina;      // 体力值消耗 /秒
 
     public Dictionary<string, int> Unlock_Ability_Requirement;  // 解锁活动所需的能力值

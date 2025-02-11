@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Activity_Study_Instance_UI : MonoBehaviour
 {
 
-    public Activity_Data_Scriptable Activity_Study_Instance;
+    public Activity_Study_Scriptable Activity_Study_Instance;
     
     [SerializeField] private Button _startStudyButton;
     [SerializeField] private Slider Study_Progress_Bar;

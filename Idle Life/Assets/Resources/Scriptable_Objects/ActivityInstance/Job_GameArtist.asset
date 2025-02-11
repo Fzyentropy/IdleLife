@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54b8e634b6a620b47b5f25dcff1b5e5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 38ded37609ea86b47a7d4eff7ef1a4f7, type: 3}
   m_Name: Job_GameArtist
   m_EditorClassIdentifier: 
   Activity_Id: Job_GameArtist
@@ -17,7 +17,6 @@ MonoBehaviour:
   Activity_Type: Job
   Activity_Duration: 10
   Required_Stamina: 20
-  Outcome_Money: 50
   Unlock_Ability_Requirement:
   - AbilityId: Ability_ImageCrafting
     LevelRequirement: 3
@@ -26,7 +25,8 @@ MonoBehaviour:
   Item_Requirements: []
   Activity_Outcome_Exp:
   - AbilityId: Ability_ImageCrafting
-    Exp: 4
-  - AbilityId: Ability_Drawing
     Exp: 3
+  - AbilityId: Ability_Drawing
+    Exp: 4
   Activity_Outcome_Item: []
+  Outcome_Money: 50

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(fileName = "New Ability", menuName = "Idle Life/Create New Ability")]
-public class Ability_Data_Scriptable : ScriptableObject
+[CreateAssetMenu(fileName = "Ability_", menuName = "Idle Life/New Ability")]
+public class Ability_Scriptable : ScriptableObject
 {
     [Header("基础信息")]
     public string Ability_Id; // 唯一标识

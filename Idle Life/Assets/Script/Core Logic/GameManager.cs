@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Change_Player_Stamina_Max(1000);
-        Change_Player_Stamina(700);
+        Change_Player_Stamina_Max(100);
+        Change_Player_Stamina(80);
     }
 
     
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         Player_Ability = new Dictionary<string, Ability>();
         
         // 加载所有Ability配置
-        var abilityDataArray = Resources.LoadAll<Ability_Data_Scriptable>(PATH_SCRIPTABLE_OBJECTS_ABILITY);
+        var abilityDataArray = Resources.LoadAll<Ability_Scriptable>(PATH_SCRIPTABLE_OBJECTS_ABILITY);
         
         foreach (var ability_instance in abilityDataArray)
         {

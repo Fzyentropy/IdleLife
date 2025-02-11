@@ -1158,7 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a20357a1d327c43993eb506ea3a6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  job_scriptable: {fileID: 11400000, guid: c8cf1f1648a9c0c47b9ad68bd5ea08ee, type: 2}
+  job_scriptable: {fileID: 11400000, guid: 7e635b9e7ce41de49b3b77ca56ad8db9, type: 2}
   ability_type: 5
   requirement_text: {fileID: 119924033}
 --- !u!1 &152338482
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a20357a1d327c43993eb506ea3a6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  job_scriptable: {fileID: 11400000, guid: c8cf1f1648a9c0c47b9ad68bd5ea08ee, type: 2}
+  job_scriptable: {fileID: 11400000, guid: 7e635b9e7ce41de49b3b77ca56ad8db9, type: 2}
   ability_type: 4
   requirement_text: {fileID: 157506687}
 --- !u!1 &180537076
@@ -1835,7 +1835,7 @@ PrefabInstance:
     - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
       propertyPath: Activity_Job_Instance
       value: 
-      objectReference: {fileID: 11400000, guid: c8cf1f1648a9c0c47b9ad68bd5ea08ee, type: 2}
+      objectReference: {fileID: 11400000, guid: 7e635b9e7ce41de49b3b77ca56ad8db9, type: 2}
     - target: {fileID: 7563565863531935125, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
       propertyPath: m_Name
       value: Job_Progress_Bar
@@ -2352,6 +2352,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Stamina
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Study_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: c896cca872b91ac44aeb7596ca412d29, type: 2}
     - target: {fileID: 4180207773539404732, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7735,6 +7739,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Stamina Max
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4180207773539404732, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7858,6 +7866,48 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4180207773539404732, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
   m_PrefabInstance: {fileID: 1908853583}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1908853585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4180207774613455894, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+  m_PrefabInstance: {fileID: 1908853583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1908853586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4180207774760921734, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+  m_PrefabInstance: {fileID: 1908853583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1908853587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4180207773539404733, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+  m_PrefabInstance: {fileID: 1908853583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1908853588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908853587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b052292e635c6d4ea3f53fb4a6044e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Activity_Sport_Instance: {fileID: 11400000, guid: b309377925884994ea5c9c5f57e15910, type: 2}
+  _startStudyButton: {fileID: 1908853585}
+  Study_Progress_Bar: {fileID: 1908853586}
 --- !u!1 &1929628076
 GameObject:
   m_ObjectHideFlags: 0

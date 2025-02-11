@@ -8,7 +8,7 @@ using UniRx;
 
 public class Job_Requirement_Mark_UI : MonoBehaviour
 {
-    public Activity_Data_Scriptable job_scriptable;
+    public Activity_Job_Scriptable job_scriptable;
     private Activity job;
     private int ability_level;
     public Ability_Types ability_type;
