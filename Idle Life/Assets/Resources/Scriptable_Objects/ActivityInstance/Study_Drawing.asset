@@ -15,8 +15,8 @@ MonoBehaviour:
   Activity_Id: Study_Drawing
   Activity_Label: Drawing
   Activity_Type: Study
-  Activity_Duration: 3
-  Required_Stamina: 5
+  Activity_Duration: 6
+  Required_Stamina: 3
   Unlock_Ability_Requirement:
   - AbilityId: Ability_Aesthetic
     LevelRequirement: 2

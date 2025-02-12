@@ -9,9 +9,10 @@ using UnityEngine.UI;
 
 public class Activity_Job_Instance_UI : MonoBehaviour
 {
-
+    [Header("Job 实例 Scriptable")]
     public Activity_Job_Scriptable Activity_Job_Instance;
     
+    [Header("UI 元素")]
     [SerializeField] private Button _startJobButton;
     [SerializeField] private Slider Job_Progress_Bar;
 

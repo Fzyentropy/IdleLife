@@ -18,11 +18,11 @@ MonoBehaviour:
   - Level: 1
     ExpRequirement: 5
   - Level: 2
-    ExpRequirement: 25
+    ExpRequirement: 18
   - Level: 3
-    ExpRequirement: 50
+    ExpRequirement: 40
   - Level: 4
-    ExpRequirement: 300
+    ExpRequirement: 80
   - Level: 5
     ExpRequirement: 800
   - Level: 6

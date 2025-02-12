@@ -16,7 +16,7 @@ MonoBehaviour:
   Activity_Label: Aesthetic
   Activity_Type: Study
   Activity_Duration: 5
-  Required_Stamina: 8
+  Required_Stamina: 4
   Unlock_Ability_Requirement: []
   Item_Requirements: []
   Activity_Outcome_Exp:

@@ -15,8 +15,8 @@ MonoBehaviour:
   Activity_Id: Study_GeneralComputer
   Activity_Label: General Computer Skills
   Activity_Type: Study
-  Activity_Duration: 5
-  Required_Stamina: 8
+  Activity_Duration: 3
+  Required_Stamina: 5
   Unlock_Ability_Requirement:
   - AbilityId: Ability_Math
     LevelRequirement: 2
