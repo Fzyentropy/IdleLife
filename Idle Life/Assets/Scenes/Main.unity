@@ -291,9 +291,9 @@ RectTransform:
   m_Father: {fileID: 1413863970}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -356.4, y: 3}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 106.600006, y: 3}
   m_SizeDelta: {x: 263.74, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &70737289
@@ -2719,9 +2719,9 @@ RectTransform:
   m_Father: {fileID: 1439743377}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -314, y: 478.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 99, y: 2.7000122}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &613529433
@@ -2979,6 +2979,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2120037325624353356}
     m_Modifications:
+    - target: {fileID: 348695374150457361, guid: bd18f89d5981b9944bd79ea0212e1fdb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8448a5a23a7d35645a01b7c03582d9df, type: 3}
     - target: {fileID: 6691768498274928603, guid: bd18f89d5981b9944bd79ea0212e1fdb, type: 3}
       propertyPath: Inventory_Item_Scriptable
       value: 
@@ -3266,6 +3270,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2120037325624353356}
     m_Modifications:
+    - target: {fileID: 348695374150457361, guid: bd18f89d5981b9944bd79ea0212e1fdb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 862dd81155617054cba681d53d7d71d3, type: 3}
     - target: {fileID: 6691768498274928603, guid: bd18f89d5981b9944bd79ea0212e1fdb, type: 3}
       propertyPath: Inventory_Item_Scriptable
       value: 
@@ -3492,10 +3500,10 @@ RectTransform:
   m_Father: {fileID: 569229403}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 386, y: 31.564026}
-  m_SizeDelta: {x: -993.49, y: -700.69}
+  m_SizeDelta: {x: 926.51, y: 379.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &832642337
 MonoBehaviour:
@@ -5894,10 +5902,10 @@ RectTransform:
   m_Father: {fileID: 569229403}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 386, y: -350.70535}
-  m_SizeDelta: {x: -993.48, y: -821.0839}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 386, y: -350.70532}
+  m_SizeDelta: {x: 926.52, y: 258.91608}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413863971
 MonoBehaviour:
@@ -5979,10 +5987,10 @@ RectTransform:
   m_Father: {fileID: 569229403}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -473, y: -104.10646}
-  m_SizeDelta: {x: -1093.9652, y: -127.4307}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -473, y: -104.106445}
+  m_SizeDelta: {x: 826.0348, y: 952.56934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1439743378
 MonoBehaviour:
@@ -7387,9 +7395,9 @@ RectTransform:
   m_Father: {fileID: 832642336}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -356.4, y: 1.8095703}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 106.600006, y: 1.8095703}
   m_SizeDelta: {x: 263.74, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1935458128
@@ -8674,7 +8682,7 @@ PrefabInstance:
     - target: {fileID: 6307160028978407285, guid: 2bad717f244dc7142bcc4bda408eb1c3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 68e5a78013e33f247822a837e55b0ab4, type: 3}
+      objectReference: {fileID: 21300000, guid: 8448a5a23a7d35645a01b7c03582d9df, type: 3}
     - target: {fileID: 6307160029349769218, guid: 2bad717f244dc7142bcc4bda408eb1c3, type: 3}
       propertyPath: m_text
       value: Townhouse
@@ -9069,6 +9077,6 @@ PrefabInstance:
     - target: {fileID: 6307160028978407285, guid: 2bad717f244dc7142bcc4bda408eb1c3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 68e5a78013e33f247822a837e55b0ab4, type: 3}
+      objectReference: {fileID: 21300000, guid: 862dd81155617054cba681d53d7d71d3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bad717f244dc7142bcc4bda408eb1c3, type: 3}
