@@ -48,6 +48,7 @@ public class ActivityManager : MonoBehaviour
     
     public void _Start_Activity (Activity new_activity)  // 按下开始按钮时调用，开始活动方法
     {
+        current_activity = null;
         current_activity = new_activity;    // 赋值时会调用 上方 private set，判定并替换当前 Activity
         StartCoroutine(ActivityLoopCoroutine());
     }
@@ -56,6 +57,7 @@ public class ActivityManager : MonoBehaviour
     // 专用协程处理活动循环
     private IEnumerator ActivityLoopCoroutine()
     {
+        
         var act = current_activity;     // 赋值当前 Activity
         tick_interval = act.Activity_Duration;   // 设置此协程的单次 Tick 时长
         current_interval = 0;     // 累计当前进度
@@ -79,15 +81,15 @@ public class ActivityManager : MonoBehaviour
             
             // 这里有可能会因为运行时间差而产生bug（资源通过Outcome_Tick更新前就进入了下一个循环），先记下
         }
-
+        
         current_interval = 0;
-        Debug.Log("协程已结束");
         yield break;
     }
 
     // 停止活动方法
     public void StopCurrentActivity()
     {
+        current_interval = 0;
         Current_Activity = null;
     }
 
@@ -138,7 +140,7 @@ public class ActivityManager : MonoBehaviour
 
                     Unlock_Ability_Requirement =
                         ConvertToAbilityRequirementDictionary(activity_study_instance.Unlock_Ability_Requirement),
-                    Activity_Requirements = ConvertToItemDictionary(activity_study_instance.Item_Requirements),
+                    Activity_Item_Requirements = ConvertToItemDictionary(activity_study_instance.Activity_Item_Requirements),
                     Activity_Outcome_Exp = ConvertToExpDictionary(activity_study_instance.Activity_Outcome_Exp),
                     Activity_Outcome_Item = ConvertToItemDictionary(activity_study_instance.Activity_Outcome_Item)
                 };
@@ -166,7 +168,7 @@ public class ActivityManager : MonoBehaviour
 
                     Unlock_Ability_Requirement =
                         ConvertToAbilityRequirementDictionary(activity_job_instance.Unlock_Ability_Requirement),
-                    Activity_Requirements = ConvertToItemDictionary(activity_job_instance.Item_Requirements),
+                    Activity_Item_Requirements = ConvertToItemDictionary(activity_job_instance.Activity_Item_Requirements),
                     Activity_Outcome_Exp = ConvertToExpDictionary(activity_job_instance.Activity_Outcome_Exp),
                     Activity_Outcome_Item = ConvertToItemDictionary(activity_job_instance.Activity_Outcome_Item)
                 };
@@ -194,7 +196,7 @@ public class ActivityManager : MonoBehaviour
 
                     Unlock_Ability_Requirement =
                         ConvertToAbilityRequirementDictionary(activity_sport_instance.Unlock_Ability_Requirement),
-                    Activity_Requirements = ConvertToItemDictionary(activity_sport_instance.Item_Requirements),
+                    Activity_Item_Requirements = ConvertToItemDictionary(activity_sport_instance.Activity_Item_Requirements),
                     Activity_Outcome_Exp = ConvertToExpDictionary(activity_sport_instance.Activity_Outcome_Exp),
                     Activity_Outcome_Item = ConvertToItemDictionary(activity_sport_instance.Activity_Outcome_Item)
                 };

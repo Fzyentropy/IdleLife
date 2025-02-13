@@ -9,6 +9,7 @@ public class SideLogicManager : MonoBehaviour
     // 体力值相关
     public bool can_restore_stamina = true;
     
+    
     private void Start()
     {
         StartCoroutine(Auto_Restore_Stamina());

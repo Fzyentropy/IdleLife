@@ -14,7 +14,7 @@ public class Activity_Scriptable : ScriptableObject
     public float Required_Stamina;    // 所需体力值
 
     public List<Ability_Level> Unlock_Ability_Requirement;  // 解锁训练所需的能力值等级
-    public List<Item_Amount> Item_Requirements;   // 训练所需原料物品
+    public List<Item_Amount> Activity_Item_Requirements;   // 训练所需原料物品
     
     public List<Ability_Exp> Activity_Outcome_Exp;    // 训练产出的能力经验值
     public List<Item_Amount> Activity_Outcome_Item;    // 训练产出的物品

@@ -28,9 +28,9 @@ public class Activity_Study_Instance_UI : MonoBehaviour
 
         //// 按钮状态绑定
         Observable.CombineLatest(
-            GameManager.GM.ObserveEveryValueChanged(gm => gm.Player_Stamina),
-            activity.ObserveEveryValueChanged(a => a.Meet_Unlock_Requirements()),
-            (stamina, unlocked) => stamina >= activity.Required_Stamina && unlocked
+                activity.ObserveEveryValueChanged(a => a.Meet_Unlock_Requirements()),
+            activity.ObserveEveryValueChanged(c => c.Can_Start_Activity()),
+            (unlocked, can_start) => unlocked && can_start
         ).Subscribe(canInteract => _startStudyButton.interactable = canInteract)
          .AddTo(this);
         

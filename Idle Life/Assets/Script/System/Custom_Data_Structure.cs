@@ -41,5 +41,8 @@ public enum Ability_Types
     Aesthetic,
     GeneralComputer,
     ImageCrafting,
-    Drawing
+    Drawing,
+    Programming,
+    ProjectManagement,
+    Sport
 }

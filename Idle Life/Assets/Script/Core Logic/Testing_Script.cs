@@ -16,10 +16,12 @@ public class Testing_Script : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
         {
             ActivityManager.AM.tick_speed = 10f;
+            GameManager.GM.Player_Stamina_Restore_Rate = 20f;
         }
         else
         {
             ActivityManager.AM.tick_speed = 1f;
+            GameManager.GM.Player_Stamina_Restore_Rate = .5f;
         }
     }
 }

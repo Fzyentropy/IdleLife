@@ -10,23 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38ded37609ea86b47a7d4eff7ef1a4f7, type: 3}
-  m_Name: Job_GameArtist
+  m_Name: Job_GameProjectManager
   m_EditorClassIdentifier: 
-  Activity_Id: Job_GameArtist
-  Activity_Label: Game Artist
+  Activity_Id: Job_GameProjectManager
+  Activity_Label: Game Project Manager
   Activity_Type: Job
-  Activity_Duration: 10
+  Activity_Duration: 15
   Required_Stamina: 30
   Unlock_Ability_Requirement:
-  - AbilityId: Ability_ImageCrafting
+  - AbilityId: Ability_ProjectManagement
     LevelRequirement: 3
-  - AbilityId: Ability_Drawing
+  - AbilityId: Ability_GeneralComputer
+    LevelRequirement: 4
+  - AbilityId: Ability_Aesthetic
     LevelRequirement: 3
   Item_Requirements: []
-  Activity_Outcome_Exp:
-  - AbilityId: Ability_ImageCrafting
-    Exp: 3
-  - AbilityId: Ability_Drawing
-    Exp: 4
-  Activity_Outcome_Item: []
-  Outcome_Money: 50
+  Activity_Outcome_Exp: []
+  Activity_Outcome_Item:
+  - ItemId: Ability_ProjectManagement
+    ItemAmount: 10
+  - ItemId: Ability_GeneralComputer
+    ItemAmount: 4
+  - ItemId: Ability_Aesthetic
+    ItemAmount: 2
+  Outcome_Money: 300

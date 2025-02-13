@@ -16,7 +16,7 @@ public abstract class Activity
     public float Required_Stamina;      // 体力值消耗 /秒
 
     public Dictionary<string, int> Unlock_Ability_Requirement;  // 解锁活动所需的能力值
-    public Dictionary<string, int> Activity_Requirements;   // 活动所需 Item
+    public Dictionary<string, int> Activity_Item_Requirements;   // 活动所需 Item
 
     public Dictionary<string, float> Activity_Outcome_Exp;   // 活动单位时间产出 - 经验值
     public Dictionary<string, int> Activity_Outcome_Item;    // 活动单位时间产出 - 物品
@@ -43,12 +43,17 @@ public abstract class Activity
         if (GameManager.GM.Player_Stamina < Required_Stamina)
             return false;
         
-        if (Activity_Requirements.Count == 0)
+        if (Activity_Item_Requirements.Count == 0)
             return true;
 
-        foreach (var item_requirement in Activity_Requirements)
+        foreach (var item_requirement in Activity_Item_Requirements)
         {
-            if (GameManager.GM.Player_Inventory[item_requirement.Key] < item_requirement.Value)  // 判定玩家是否满足所需的 每项 Item 的数量
+            if (Inventory.IVT.Player_Items.ContainsKey(item_requirement.Key))
+            {
+                if (Inventory.IVT.Player_Items[item_requirement.Key] < item_requirement.Value)   // 判定玩家是否满足所需的 每项 Item 的数量)
+                    return false;
+            }
+            else
                 return false;
         }
 
@@ -66,14 +71,14 @@ public abstract class Activity
         GameManager.GM.Change_Player_Stamina(-Required_Stamina);        // 消耗体力值
         
 
-        if (Activity_Requirements.Count > 0)    // 结算 Item 消耗
+        if (Activity_Item_Requirements.Count > 0)    // 结算 Item 消耗
         {
-            foreach (var item_requirement in Activity_Requirements)
+            foreach (var item_requirement in Activity_Item_Requirements)
             {
-                if (GameManager.GM.Player_Inventory[item_requirement.Key] == item_requirement.Value)    // 若正好拥有需要消耗的数量，则直接从仓库中移除该资源
-                    GameManager.GM.Player_Inventory.Remove(item_requirement.Key);
+                if (Inventory.IVT.Player_Items[item_requirement.Key] == item_requirement.Value)    // 若正好拥有需要消耗的数量，则直接从仓库中移除该资源
+                    Inventory.IVT.Player_Items.Remove(item_requirement.Key);
                 else
-                    GameManager.GM.Player_Inventory[item_requirement.Key] -= item_requirement.Value;    // 若拥有的数量超过需要消耗的，则从数量中减去
+                    Inventory.IVT.Player_Items[item_requirement.Key] -= item_requirement.Value;    // 若拥有的数量超过需要消耗的，则从数量中减去
 
             }
         }
@@ -90,10 +95,10 @@ public abstract class Activity
         {
             foreach (var item in Activity_Outcome_Item)
             {
-                if (GameManager.GM.Player_Inventory.ContainsKey(item.Key)) // 若已经拥有该物品，则增加数量
-                    GameManager.GM.Player_Inventory[item.Key] ++;
+                if (Inventory.IVT.Player_Items.ContainsKey(item.Key)) // 若已经拥有该物品，则增加数量
+                    Inventory.IVT.Player_Items[item.Key] ++;
                 else
-                    GameManager.GM.Player_Inventory.Add(item.Key,item.Value);  // 若没有该物品，则增加数量
+                    Inventory.IVT.Player_Items.Add(item.Key,item.Value);  // 若没有该物品，则增加数量
             }
         }
         

@@ -18,6 +18,8 @@ MonoBehaviour:
   Activity_Duration: 4
   Required_Stamina: -10
   Unlock_Ability_Requirement: []
-  Item_Requirements: []
+  Activity_Item_Requirements:
+  - ItemId: Item_Food
+    ItemAmount: 1
   Activity_Outcome_Exp: []
   Activity_Outcome_Item: []

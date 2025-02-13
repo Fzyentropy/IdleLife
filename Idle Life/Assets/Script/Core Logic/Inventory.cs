@@ -1,0 +1,191 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour
+{
+    
+    ////// 所有 Item 索引
+
+    public List<Item_Scriptable> All_Item_Scriptables;         // 所有 Item 集合索引
+    public List<Item> All_Items;     // 备选方案，所有 Item 集合索引，使用 Item 类实例
+    
+    ////// 玩家当前拥有的 Item
+    
+    public int Player_Inventory_Slot_Amount { get; private set; }        // 玩家仓库大小，能存储的 Item 数量
+    [ShowInInspector] public Dictionary<string, int> Player_Items { get; private set; }     // 玩家所拥有的 Item,  string (Item名称),  int (Item数量)  @@@@@@@@@@@
+    // public Dictionary<Item, int> Player_Items;    // 备选方案，使用 Item实例 Dictionary
+    
+    //////  Inventory 唯一实例
+
+    public static Inventory IVT;
+
+    private const string PATH_ITEMS = "Scriptable_Objects/Items";
+    
+    
+    
+    
+    
+
+    private void Awake()
+    {
+        IVT = this;
+        Load_All_Items_From_Folder();       // 从 Resource 文件夹中读取
+        // Load_All_Items_From_Item_List();     // 从 Item Scriptable Object List 中读取
+
+        Load_Player_Inventory();
+    }
+
+    
+
+    ////// 初始化所有 Item 索引
+
+    private void Load_All_Items_From_Folder()       // 从 Resources 文件夹加载所有 Item_Scriptable，并转化成 Item 实例存储进 Item List
+    {
+        All_Items = new List<Item>();
+        
+        // 加载所有 Item Scriptable
+        var itemArray = Resources.LoadAll<Item_Scriptable>(PATH_ITEMS);
+        
+        foreach (var item_scriptable in itemArray)
+        {
+            var _item = Create_Item_From_Scriptable(item_scriptable);
+            if (_item != null)
+            {
+                All_Items.Add(_item);
+            }
+        }
+        
+        Debug.Log($"已加载{All_Items.Count}项活动");
+
+    }
+
+
+    private void Load_All_Items_From_Item_List()        // 将一个 Item_Scriptable 转化为 Item 实例
+    {
+    }
+
+
+    private Item Create_Item_From_Scriptable(Item_Scriptable itemScriptable)
+    {
+        if (itemScriptable is Item_NormalItem_Scriptable item_NormalItem_instance)
+        {
+            try
+            {
+                var item = new Item_NormalItem()        // 普通物品
+                {
+                    Item_Id = item_NormalItem_instance.Item_Id,
+                    Item_Label = item_NormalItem_instance.Item_Label,
+                    Item_Type = item_NormalItem_instance.Item_Type
+                };
+                
+                return item;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"加载物品{item_NormalItem_instance.Item_Id}失败: {e.Message}");
+                return null;
+            }
+        }
+        
+        if (itemScriptable is Item_ShopPurchase_Scriptable item_ShopPurchase_instance)
+        {
+            try
+            {
+                var item = new Item_ShopPurchase()        // 商店购买物品
+                {
+                    Item_Id = item_ShopPurchase_instance.Item_Id,
+                    Item_Label = item_ShopPurchase_instance.Item_Label,
+                    Item_Type = item_ShopPurchase_instance.Item_Type,
+                    
+                    // 商店购买物品 的特殊属性
+                    Item_Purchase_Price = item_ShopPurchase_instance.Item_Purchase_Price
+                };
+                
+                return item;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"加载物品{item_ShopPurchase_instance.Item_Id}失败: {e.Message}");
+                return null;
+            }
+        }
+        
+        // 其他类型 Item 的初始化
+        /*if (itemScriptable is Item_NormalItem_Scriptable item_NormalItem_instance)
+        {
+            try
+            {
+                var item = new Item_NormalItem()        // 普通物品
+                {
+                    Item_Id = item_NormalItem_instance.Item_Id,
+                    Item_Label = item_NormalItem_instance.Item_Label,
+                    Item_Type = item_NormalItem_instance.Item_Type
+                };
+                
+                return item;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"加载物品{item_NormalItem_instance.Item_Id}失败: {e.Message}");
+                return null;
+            }
+        }*/
+
+        return null;
+    }
+
+
+
+    public void Load_Player_Inventory()         // 初始化/加载 玩家 Inventory Dictionary
+    {
+        Player_Items = new Dictionary<string, int>();
+        Player_Inventory_Slot_Amount = 10;
+    }
+    
+    
+    
+    
+    
+    
+    //////  库存 加入、取出 处理方法
+
+    public void Add_Item_To_Inventory(string itemID, int itemAmount)      // 向仓库内添加物品
+    {
+        
+        if (Player_Items.ContainsKey(itemID))   // 若已经存在该物品，则增加数量
+        {
+            Player_Items[itemID]++;
+        }
+        
+        else   // 若未拥有该物品
+        {
+            // 检查仓库是否已满，TODO
+            
+            Player_Items.Add(itemID,itemAmount);    // 添加该物品
+        }
+        
+    }
+
+
+    public void Remove_Item_To_Inventory(string itemID, int itemAmount)      // 从仓库内取出物品
+    {
+        if (Player_Items.ContainsKey(itemID) && Player_Items[itemID] >= itemAmount)     // 若有该物品，且数量足够扣除
+        {
+            // 扣除指定数量的该物品
+            if (Player_Items[itemID] > itemAmount)
+                Player_Items[itemID] -= itemAmount;
+            else
+                Player_Items.Remove(itemID);
+
+        }
+        
+    }
+
+
+
+
+}
