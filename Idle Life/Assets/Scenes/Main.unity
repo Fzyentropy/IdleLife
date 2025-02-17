@@ -3360,7 +3360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8499775387780914849, guid: bd18f89d5981b9944bd79ea0212e1fdb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 104.1
+      value: 104.1001
       objectReference: {fileID: 0}
     - target: {fileID: 8499775387780914849, guid: bd18f89d5981b9944bd79ea0212e1fdb, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3410,7 +3410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player_Money: 0
-  Player_Stamina_Restore_Rate: 0.5
+  Player_Stamina_Restore_Rate: 2
 --- !u!4 &767319589
 Transform:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ public class Activity_Study_Instance_UI : MonoBehaviour
         _startStudyButton.OnClickAsObservable()
             .Subscribe(_ =>
                 {
-                    if (ActivityManager.AM.current_activity != null && activity.Activity_Id == ActivityManager.AM.current_activity.Activity_Id)
+                    if (ActivityManager.AM.current_activity != null && activity == ActivityManager.AM.current_activity)
                         ActivityManager.AM.StopCurrentActivity();
                     else 
                         Start_Study(activity);
@@ -73,7 +73,7 @@ public class Activity_Study_Instance_UI : MonoBehaviour
             {
                 Study_Progress_Bar.maxValue = data.full;
 
-                if (ActivityManager.AM.current_activity != null && activity.Activity_Id == ActivityManager.AM.current_activity.Activity_Id)
+                if (ActivityManager.AM.current_activity != null && activity == ActivityManager.AM.current_activity)
                     Study_Progress_Bar.value = data.current;
                 else
                     Study_Progress_Bar.value = 0;
@@ -90,9 +90,7 @@ public class Activity_Study_Instance_UI : MonoBehaviour
 
     private void Start_Study(Activity activity)       // 点击按钮时调用的方法，开始学习 or 停止当前学习
     {
-        if (activity.Can_Start_Activity())
-        {
-            ActivityManager.AM._Start_Activity(activity);
-        }
+        // if (activity.Can_Start_Activity())   //假设上方判断按钮interactable的方法变更，可能需要在此处加上判定
+        ActivityManager.AM._Start_Activity(activity);
     }
 }

@@ -16,19 +16,15 @@ public class ActivityManager : MonoBehaviour
     
     public List<Activity> All_Activities;   // 全部的 Activities, 在游戏启动时全部加载于此
 
-    [CanBeNull] private Activity Current_Activity;  // 当前 Activity 容器
-
     [CanBeNull] public Activity current_activity    // 当前活动属性 连接和更改容器存储的 Activity
     {
-        get => Current_Activity;
-        private set 
-        {
-            if (Current_Activity != null) { StopCurrentActivity(); }   // 判定并替换旧活动
-            Current_Activity = value;
-        }
+        get;
+        private set;
     }
-    
-    
+
+    public Coroutine Activity_Coroutine;      // 正在进行的活动 Coroutine
+
+
     //////  活动进度相关参数
 
     public float tick_interval;     // 当前活动单次 Tick 总时长
@@ -48,23 +44,25 @@ public class ActivityManager : MonoBehaviour
     
     public void _Start_Activity (Activity new_activity)  // 按下开始按钮时调用，开始活动方法
     {
-        current_activity = null;
+        if (current_activity != null)
+        {
+            StopCurrentActivity();
+        }
+        
         current_activity = new_activity;    // 赋值时会调用 上方 private set，判定并替换当前 Activity
-        StartCoroutine(ActivityLoopCoroutine());
+        Activity_Coroutine = StartCoroutine(ActivityLoopCoroutine(new_activity));
     }
 
     
     // 专用协程处理活动循环
-    private IEnumerator ActivityLoopCoroutine()
+    private IEnumerator ActivityLoopCoroutine(Activity activity_to_loop)
     {
-        
-        var act = current_activity;     // 赋值当前 Activity
-        tick_interval = act.Activity_Duration;   // 设置此协程的单次 Tick 时长
+        tick_interval = activity_to_loop.Activity_Duration;   // 设置此协程的单次 Tick 时长
         current_interval = 0;     // 累计当前进度
         float elapsed_time = 0.01f;     // 单次计算单位，也表示精度
         
 
-        while (act == current_activity && act.Can_Start_Activity())   // Tick 循环 Loop
+        while (activity_to_loop == current_activity && activity_to_loop.Can_Start_Activity())   // Tick 循环 Loop
         {
             if (current_interval < tick_interval)
             {
@@ -76,21 +74,23 @@ public class ActivityManager : MonoBehaviour
                 current_interval = 0;
                 
                 // act.OnTick?.Invoke();
-                act.Activity_Outcome_Tick();    // 一次 Tick 执行， TODO 替换成 事件响应
+                activity_to_loop.Activity_Outcome_Tick();    // 一次 Tick 执行， TODO 替换成 事件响应
             }
             
             // 这里有可能会因为运行时间差而产生bug（资源通过Outcome_Tick更新前就进入了下一个循环），先记下
         }
         
-        current_interval = 0;
-        yield break;
+        StopCurrentActivity();
     }
 
     // 停止活动方法
     public void StopCurrentActivity()
     {
+        if (Activity_Coroutine != null)
+            StopCoroutine(Activity_Coroutine);
+        
         current_interval = 0;
-        Current_Activity = null;
+        current_activity = null; 
     }
 
     
@@ -100,7 +100,8 @@ public class ActivityManager : MonoBehaviour
         AM = this;
         LoadAllActivities();
     }
-    
+
+
 
     ////// 从文件夹中加载 Scriptable Object 的具体方法
 

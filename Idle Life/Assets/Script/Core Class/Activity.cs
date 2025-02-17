@@ -37,13 +37,14 @@ public abstract class Activity
     }
     
 
-    public virtual bool Can_Start_Activity()  // 是否可以开始活动，即所需Item是否足够的判定，子类可加入自适应判定
+    public virtual bool Can_Start_Activity()  // 是否可以开始活动，即所需 Stamina 和 Item 是否足够的判定，子类可加入自适应判定
     {
 
-        if (GameManager.GM.Player_Stamina < Required_Stamina)
+        if (GameManager.GM.Player_Stamina < Required_Stamina)       // Stamina 判定
             return false;
         
-        if (Activity_Item_Requirements.Count == 0)
+        
+        if (Activity_Item_Requirements.Count == 0)                  // Item 判定
             return true;
 
         foreach (var item_requirement in Activity_Item_Requirements)
@@ -56,8 +57,9 @@ public abstract class Activity
             else
                 return false;
         }
+        
 
-        return true;
+        return true;               // 若 Stamina 和 Item 都足够，返回 true
     }
 
     

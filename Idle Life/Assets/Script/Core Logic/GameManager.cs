@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Change_Player_Stamina_Max(100);
-        Change_Player_Stamina(80);
+        Change_Player_Stamina_Max(300);
+        Change_Player_Stamina(250);
     }
 
     

@@ -46,12 +46,10 @@ public class Job_Requirement_Mark_UI : MonoBehaviour
                 if (abilityLevel >= job.Unlock_Ability_Requirement["Ability_" + ability_type])
                 {
                     requirement_text.color = Color.green;
-                    Debug.Log("Color changed to green");
                 }
                 else
                 {
                     requirement_text.color = Color.red;
-                    Debug.Log("Color changed to red");
                 }
             }).AddTo(this);
     }
