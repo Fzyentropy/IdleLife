@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3126113442899277094}
   - component: {fileID: 3948837203202070394}
   m_Layer: 5
-  m_Name: Job_Instance
+  m_Name: Activity_Job_Instance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,9 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d565529b802f54d9446ace6297985f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Activity_Job_Instance: {fileID: 0}
-  _startJobButton: {fileID: 3126113443183627589}
-  Job_Progress_Bar: {fileID: 547692406100377068}
+  Activity_Instance: {fileID: 0}
+  _startButton: {fileID: 3126113443183627589}
+  Progress_Bar: {fileID: 547692406100377068}
 --- !u!1 &3126113443147749373
 GameObject:
   m_ObjectHideFlags: 0

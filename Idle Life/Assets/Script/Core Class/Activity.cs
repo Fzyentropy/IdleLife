@@ -97,10 +97,7 @@ public abstract class Activity
         {
             foreach (var item in Activity_Outcome_Item)
             {
-                if (Inventory.IVT.Player_Items.ContainsKey(item.Key)) // 若已经拥有该物品，则增加数量
-                    Inventory.IVT.Player_Items[item.Key] ++;
-                else
-                    Inventory.IVT.Player_Items.Add(item.Key,item.Value);  // 若没有该物品，则增加数量
+                Inventory.IVT.Add_Item_To_Inventory(item.Key, item.Value);
             }
         }
         

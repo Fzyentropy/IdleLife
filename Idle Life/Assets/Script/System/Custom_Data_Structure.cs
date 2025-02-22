@@ -5,14 +5,14 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Ability_Exp  ////// 对各种 Activity, 各Activity 所产出的能力经验值
+public class Ability_Exp  ////// 对各种 Activity, 各 Activity 所产出的能力经验值
 {
     public string AbilityId;
     public float Exp;
 }
 
 [System.Serializable]
-public class Ability_Level  /////// 对各种 Activity，各Activity 解锁所需的能力等级要求 
+public class Ability_Level  /////// 对各种 Activity，各 Activity 解锁所需的能力等级要求 
 {
     public string AbilityId;
     public int LevelRequirement;

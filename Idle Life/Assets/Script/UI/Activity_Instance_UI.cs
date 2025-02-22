@@ -7,42 +7,46 @@ using UniRx;
 using TMPro;
 using UnityEngine.UI;
 
-public class Activity_Job_Instance_UI : MonoBehaviour
+public class Activity_Instance_UI : MonoBehaviour
 {
-    [Header("Job 实例 Scriptable")]
-    public Activity_Job_Scriptable Activity_Job_Instance;
+    [Header("Activity Scriptable 实例 ")]
+    public Activity_Scriptable Activity_Instance;
     
     [Header("UI 元素")]
-    [SerializeField] private Button _startJobButton;
-    [SerializeField] private Slider Job_Progress_Bar;
+    [SerializeField] private Button _startButton;
+    [SerializeField] private Slider Progress_Bar;
 
 
     private void Start()
     {
-        Setup_Job();
+        Setup_Activity_Instance();
     }
     
 
-    private void Setup_Job()
+    private void Setup_Activity_Instance()
     {
-        var activity = Get_Activity_From_AM(Activity_Job_Instance.Activity_Id);
+        var activity = ActivityManager.AM.Get_Activity_From_AM(Activity_Instance.Activity_Id);
 
         //// 按钮状态绑定
         Observable.CombineLatest(
             GameManager.GM.ObserveEveryValueChanged(gm => gm.Player_Stamina),
             activity.ObserveEveryValueChanged(a => a.Meet_Unlock_Requirements()),
             (stamina, unlocked) => stamina >= activity.Required_Stamina && unlocked
-        ).Subscribe(canInteract => _startJobButton.interactable = canInteract)
+        ).Subscribe(canInteract => _startButton.interactable = canInteract)
          .AddTo(this);
         
         
-        //// 动态更新按钮状态
+        //// 动态更新按钮外观
         ActivityManager.AM.ObserveEveryValueChanged(am => am.current_activity)
             .Subscribe(current => {
                 bool isCurrent = current == activity;
             
                 // 更新按钮文本
-                _startJobButton.GetComponentInChildren<TMP_Text>().text = isCurrent ? "Stop" : "Work";
+                if (Activity_Instance is Activity_Job_Scriptable)
+                    _startButton.GetComponentInChildren<TMP_Text>().text = isCurrent ? "Stop" : "Work";
+                
+                else
+                    _startButton.GetComponentInChildren<TMP_Text>().text = isCurrent ? "Stop" : "Start";
             
                 // 更新按钮样式（示例：切换颜色）
                 // _learnMathBtn.GetComponent<Image>().color = isCurrent ? Color.red : Color.white;
@@ -54,13 +58,13 @@ public class Activity_Job_Instance_UI : MonoBehaviour
 
         
         //// 点击事件
-        _startJobButton.OnClickAsObservable()
+        _startButton.OnClickAsObservable()
             .Subscribe(_ =>
                 {
                     if (ActivityManager.AM.current_activity != null && activity.Activity_Id == ActivityManager.AM.current_activity.Activity_Id)
                         ActivityManager.AM.StopCurrentActivity();
                     else 
-                        Start_Job(activity);
+                        Start_Activity(activity);
                 }
                 ).AddTo(this);
         
@@ -72,24 +76,19 @@ public class Activity_Job_Instance_UI : MonoBehaviour
                 (current, full) => new { current, full })
             .Subscribe(data =>
             {
-                Job_Progress_Bar.maxValue = data.full;
+                Progress_Bar.maxValue = data.full;
 
                 if (ActivityManager.AM.current_activity != null && activity.Activity_Id == ActivityManager.AM.current_activity.Activity_Id)
-                    Job_Progress_Bar.value = data.current;
+                    Progress_Bar.value = data.current;
                 else
-                    Job_Progress_Bar.value = 0;
+                    Progress_Bar.value = 0;
             })
             .AddTo(this);
     }
     
+    
 
-    private Activity Get_Activity_From_AM(string activityId)      // 从 AM 的 All_Activity List 中获取指定的活动
-    {
-        return ActivityManager.AM.All_Activities
-            .FirstOrDefault(a => a.Activity_Id == activityId);
-    }
-
-    private void Start_Job(Activity activity)       // 点击按钮时调用的方法，开始学习 or 停止当前学习
+    private void Start_Activity(Activity activity)       // 点击按钮时调用的方法，开始学习 or 停止当前学习
     {
         if (activity.Can_Start_Activity())
         {

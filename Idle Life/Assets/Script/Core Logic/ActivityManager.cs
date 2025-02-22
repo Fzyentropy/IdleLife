@@ -29,7 +29,7 @@ public class ActivityManager : MonoBehaviour
 
     public float tick_interval;     // 当前活动单次 Tick 总时长
     public float current_interval;  // 当次 Tick 所经过的时长
-    public float tick_speed = 1f;   // Tick的速度
+    public float tick_speed = 1f;   // Tick的速度，可进行时间控制
     
     ////// 所有配置、路径参数
     
@@ -41,6 +41,9 @@ public class ActivityManager : MonoBehaviour
     //TODO 判定按钮是否可以按下（若Item不够则无法按下并弹出警告）
     
     
+    
+    ////////  运行活动相关的方法 与 活动循环协程
+   
     
     public void _Start_Activity (Activity new_activity)  // 按下开始按钮时调用，开始活动方法
     {
@@ -94,7 +97,11 @@ public class ActivityManager : MonoBehaviour
     }
 
     
-
+    ////////  运行活动相关的方法 与 活动循环协程  END
+    
+    
+    
+    
     private void Awake()
     {
         AM = this;
@@ -139,8 +146,7 @@ public class ActivityManager : MonoBehaviour
                     Activity_Duration = activity_study_instance.Activity_Duration,
                     Required_Stamina = activity_study_instance.Required_Stamina,
 
-                    Unlock_Ability_Requirement =
-                        ConvertToAbilityRequirementDictionary(activity_study_instance.Unlock_Ability_Requirement),
+                    Unlock_Ability_Requirement = ConvertToAbilityRequirementDictionary(activity_study_instance.Unlock_Ability_Requirement),
                     Activity_Item_Requirements = ConvertToItemDictionary(activity_study_instance.Activity_Item_Requirements),
                     Activity_Outcome_Exp = ConvertToExpDictionary(activity_study_instance.Activity_Outcome_Exp),
                     Activity_Outcome_Item = ConvertToItemDictionary(activity_study_instance.Activity_Outcome_Item)
@@ -167,8 +173,7 @@ public class ActivityManager : MonoBehaviour
                     Required_Stamina = activity_job_instance.Required_Stamina,
                     Job_Salary = activity_job_instance.Outcome_Money,
 
-                    Unlock_Ability_Requirement =
-                        ConvertToAbilityRequirementDictionary(activity_job_instance.Unlock_Ability_Requirement),
+                    Unlock_Ability_Requirement = ConvertToAbilityRequirementDictionary(activity_job_instance.Unlock_Ability_Requirement),
                     Activity_Item_Requirements = ConvertToItemDictionary(activity_job_instance.Activity_Item_Requirements),
                     Activity_Outcome_Exp = ConvertToExpDictionary(activity_job_instance.Activity_Outcome_Exp),
                     Activity_Outcome_Item = ConvertToItemDictionary(activity_job_instance.Activity_Outcome_Item)
@@ -195,8 +200,7 @@ public class ActivityManager : MonoBehaviour
                     Required_Stamina = activity_sport_instance.Required_Stamina,
                     Add_Stamina_Max_Amount = activity_sport_instance.Add_Stamina_Max_Amount,
 
-                    Unlock_Ability_Requirement =
-                        ConvertToAbilityRequirementDictionary(activity_sport_instance.Unlock_Ability_Requirement),
+                    Unlock_Ability_Requirement = ConvertToAbilityRequirementDictionary(activity_sport_instance.Unlock_Ability_Requirement),
                     Activity_Item_Requirements = ConvertToItemDictionary(activity_sport_instance.Activity_Item_Requirements),
                     Activity_Outcome_Exp = ConvertToExpDictionary(activity_sport_instance.Activity_Outcome_Exp),
                     Activity_Outcome_Item = ConvertToItemDictionary(activity_sport_instance.Activity_Outcome_Item)
@@ -210,37 +214,72 @@ public class ActivityManager : MonoBehaviour
             }
         }
         
-        // 其他类型的活动加载
-        // 在此处扩展
-        /*if (activityInstance.Activity_Type == "其他类型")
+        if (activity_instance is Activity_Entertainment_Scriptable activity_entertainment_instance)    // 若是 Study 
         {
             try
             {
-                var activity = new Activity_Study()
+                var activity = new Activity_Entertainment()
                 {
-                    Activity_Id = activityInstance.Activity_Id,
-                    Activity_Label = activityInstance.Activity_Label,
-                    Activity_Type = activityInstance.Activity_Type,
-                    Activity_Duration = activityInstance.Activity_Duration,
-                    Required_Stamina = activityInstance.Required_Stamina,
+                    Activity_Id = activity_entertainment_instance.Activity_Id,
+                    Activity_Label = activity_entertainment_instance.Activity_Label,
+                    Activity_Type = activity_entertainment_instance.Activity_Type,
+                    Activity_Duration = activity_entertainment_instance.Activity_Duration,
+                    Required_Stamina = activity_entertainment_instance.Required_Stamina,
 
-                    Unlock_Ability_Requirement =
-                        ConvertToAbilityRequirementDictionary(activityInstance.Unlock_Ability_Requirement),
-                    Activity_Requirements = ConvertToItemDictionary(activityInstance.Item_Requirements),
-                    Activity_Outcome_Exp = ConvertToExpDictionary(activityInstance.Activity_Outcome_Exp),
-                    Activity_Outcome_Item = ConvertToItemDictionary(activityInstance.Activity_Outcome_Item)
+                    Unlock_Ability_Requirement = ConvertToAbilityRequirementDictionary(activity_entertainment_instance.Unlock_Ability_Requirement),
+                    Activity_Item_Requirements = ConvertToItemDictionary(activity_entertainment_instance.Activity_Item_Requirements),
+                    Activity_Outcome_Exp = ConvertToExpDictionary(activity_entertainment_instance.Activity_Outcome_Exp),
+                    Activity_Outcome_Item = ConvertToItemDictionary(activity_entertainment_instance.Activity_Outcome_Item)
                 };
                 return activity;
             }
             catch (Exception e)
             {
-                Debug.LogError($"加载活动{activityInstance.Activity_Id}失败: {e.Message}");
+                Debug.LogError($"加载活动{activity_instance.Activity_Id}失败: {e.Message}");
+                return null;
+            }
+        }
+        
+        
+        // 其他类型的活动加载
+        // 在此处扩展
+        
+        /*if (activity_instance is Activity_Study_Scriptable activity_study_instance)    // 若是 Study 
+        {
+            try
+            {
+                var activity = new Activity_Study()
+                {
+                    Activity_Id = activity_study_instance.Activity_Id,
+                    Activity_Label = activity_study_instance.Activity_Label,
+                    Activity_Type = activity_study_instance.Activity_Type,
+                    Activity_Duration = activity_study_instance.Activity_Duration,
+                    Required_Stamina = activity_study_instance.Required_Stamina,
+
+                    Unlock_Ability_Requirement = ConvertToAbilityRequirementDictionary(activity_study_instance.Unlock_Ability_Requirement),
+                    Activity_Item_Requirements = ConvertToItemDictionary(activity_study_instance.Activity_Item_Requirements),
+                    Activity_Outcome_Exp = ConvertToExpDictionary(activity_study_instance.Activity_Outcome_Exp),
+                    Activity_Outcome_Item = ConvertToItemDictionary(activity_study_instance.Activity_Outcome_Item)
+                };
+                return activity;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"加载活动{activity_instance.Activity_Id}失败: {e.Message}");
                 return null;
             }
         }*/
 
         return null;
     }
+    
+    
+    public Activity Get_Activity_From_AM(string activityId)      // 从 AM 的 All_Activity List 中获取指定的活动
+    {
+        return All_Activities.FirstOrDefault(a => a.Activity_Id == activityId);
+    }
+    
+    
 
     // 辅助转换方法
     private Dictionary<string, int> ConvertToItemDictionary(List<Item_Amount> list)

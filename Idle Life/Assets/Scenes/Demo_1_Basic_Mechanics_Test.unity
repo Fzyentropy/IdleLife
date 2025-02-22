@@ -489,6 +489,10 @@ PrefabInstance:
       value: Stamina
       objectReference: {fileID: 0}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: c896cca872b91ac44aeb7596ca412d29, type: 2}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
       objectReference: {fileID: 11400000, guid: c896cca872b91ac44aeb7596ca412d29, type: 2}
@@ -2859,6 +2863,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: b309377925884994ea5c9c5f57e15910, type: 2}
     - target: {fileID: 4180207773539404732, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

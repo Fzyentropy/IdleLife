@@ -16,8 +16,7 @@ public class GameManager : MonoBehaviour
     public float Player_Stamina_Restore_Rate = 1f;
     
     public Dictionary<string, Ability> Player_Ability;    // 玩家的能力值
-    public Dictionary<string, int> Player_Inventory;     // 玩家拥有的 Item (Inventory)
-    
+
 
 
 

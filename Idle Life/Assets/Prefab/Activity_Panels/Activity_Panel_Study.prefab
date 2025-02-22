@@ -240,6 +240,10 @@ PrefabInstance:
       value: Drawing
       objectReference: {fileID: 0}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: bba80e954d212b34a9e09730d779bfce, type: 2}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
       objectReference: {fileID: 11400000, guid: bba80e954d212b34a9e09730d779bfce, type: 2}
@@ -445,6 +449,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Programming
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: 3aab8bf67801deb46a72a2fe5a9f9bdb, type: 2}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
@@ -653,6 +661,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Image Crafting
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: 9699f3ef3008ded488463823e9496d7e, type: 2}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
@@ -864,6 +876,10 @@ PrefabInstance:
       value: "General \nComputer Skills"
       objectReference: {fileID: 0}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: f215f33a3cdcc3a45b9ffe15af727e5d, type: 2}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
       objectReference: {fileID: 11400000, guid: f215f33a3cdcc3a45b9ffe15af727e5d, type: 2}
@@ -1070,6 +1086,10 @@ PrefabInstance:
       value: Aesthetic
       objectReference: {fileID: 0}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: a992b95d428328d41adfe6bb829ec6c9, type: 2}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
       objectReference: {fileID: 11400000, guid: a992b95d428328d41adfe6bb829ec6c9, type: 2}
@@ -1259,6 +1279,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Physics
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: a45436eaadfbb204a949cb5d2c73ff53, type: 2}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
@@ -1459,6 +1483,10 @@ PrefabInstance:
 
         Management'
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: 4abbbcf62ad169d4fbf9b2f6a334bf47, type: 2}
     - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: Activity_Study_Instance
       value: 
@@ -1673,6 +1701,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Math
       objectReference: {fileID: 0}
+    - target: {fileID: 4180207773539404729, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: f97ae4697c4af0b4ca16d23cefa06a60, type: 2}
     - target: {fileID: 4180207773539404732, guid: cf63cfdf984777f4ebd85075b7ee0442, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

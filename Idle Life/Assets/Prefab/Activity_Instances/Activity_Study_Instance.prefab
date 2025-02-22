@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 4180207773539404731}
   - component: {fileID: 4180207773539404729}
   m_Layer: 5
-  m_Name: Study_Instace
+  m_Name: Activity_Study_Instance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -771,12 +771,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4180207773539404733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06300e3ae3048a54eb5e29cd2cc7dc5d, type: 3}
+  m_Script: {fileID: 11500000, guid: d7d565529b802f54d9446ace6297985f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Activity_Study_Instance: {fileID: 11400000, guid: f97ae4697c4af0b4ca16d23cefa06a60, type: 2}
-  _startStudyButton: {fileID: 4180207774613455894}
-  Study_Progress_Bar: {fileID: 4180207774760921734}
+  Activity_Instance: {fileID: 0}
+  _startButton: {fileID: 4180207774613455894}
+  Progress_Bar: {fileID: 4180207774760921734}
 --- !u!1 &4180207773674652489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 4180207774613455893}
   - component: {fileID: 4180207774613455894}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Start Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -3004,6 +3004,10 @@ PrefabInstance:
       value: 4.7400208
       objectReference: {fileID: 0}
     - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: b049be5f38370354c943468bc241939b, type: 2}
+    - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
       propertyPath: Activity_Job_Instance
       value: 
       objectReference: {fileID: 11400000, guid: b049be5f38370354c943468bc241939b, type: 2}
@@ -3140,6 +3144,10 @@ PrefabInstance:
       value: Game Programmer
       objectReference: {fileID: 0}
     - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: b4df413d7f29cd5468c4d99ffa28ba45, type: 2}
+    - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
       propertyPath: Activity_Job_Instance
       value: 
       objectReference: {fileID: 11400000, guid: b4df413d7f29cd5468c4d99ffa28ba45, type: 2}
@@ -3275,6 +3283,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Game Artist
       objectReference: {fileID: 0}
+    - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
+      propertyPath: Activity_Instance
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e635b9e7ce41de49b3b77ca56ad8db9, type: 2}
     - target: {fileID: 3948837203202070394, guid: e8494136e4cc09c4ab8eacc6d8c7df95, type: 3}
       propertyPath: Activity_Job_Instance
       value: 

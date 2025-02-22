@@ -171,7 +171,7 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void Remove_Item_To_Inventory(string itemID, int itemAmount)      // 从仓库内取出物品
+    public void Remove_Item_From_Inventory(string itemID, int itemAmount)      // 从仓库内取出物品
     {
         if (Player_Items.ContainsKey(itemID) && Player_Items[itemID] >= itemAmount)     // 若有该物品，且数量足够扣除
         {
