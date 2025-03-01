@@ -74,7 +74,6 @@ public class PanelManager : MonoBehaviour
         {
             panel.SetActive(true);
             current_panel = panel;
-            Debug.Log("panel 为空，生成新panel");
         }
         
 

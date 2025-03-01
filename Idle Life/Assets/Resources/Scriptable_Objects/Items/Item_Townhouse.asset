@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item_Id: Item_Townhouse
   Item_Label: Town House
+  Item_Sprite: {fileID: 21300000, guid: 8448a5a23a7d35645a01b7c03582d9df, type: 3}
   Item_Type: ShopPurchase
   Item_Purchase_Price: 1200

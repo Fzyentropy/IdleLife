@@ -9,32 +9,64 @@ using UniRx;
 public class Inventory_Item_UI : MonoBehaviour
 {
     [Header("Item Scriptable")]
-    public Item_Scriptable Inventory_Item_Scriptable;
-    
-    [Header("UI")]
+    public Item item_instance;
+
+    [Header("UI")] 
+    // public TMP_Text item_label;     // Item 名称，暂时不显示
     public Image item_image;
     public TMP_Text item_amount;
 
 
-    private void Update()
+    
+    private void Start()
     {
-        Update_Item_Amount();
+        Check_Item_Instance();
+        Item_Setup();
+    }
+
+    
+
+    private void Check_Item_Instance()
+    {
+        if (item_instance == null)
+            Debug.LogError("Inventory_Item_UI(prefab): Item 实例未设置");
     }
 
 
-    public void Update_Item_Amount()
+    private void Item_Setup()       // 设置 Item 的外观，等不变的因素
     {
-        if (Inventory.IVT.Player_Items.ContainsKey(Inventory_Item_Scriptable.Item_Id))
-        {
-            item_amount.text = Inventory.IVT.Player_Items[Inventory_Item_Scriptable.Item_Id].ToString();
-            Debug.Log("Id: " + Inventory_Item_Scriptable.Item_Id + "Amount: "+ Inventory.IVT.Player_Items[Inventory_Item_Scriptable.Item_Id]);
-        }
-        else
-        {
-            item_amount.text = "0";
-        }
-
+        // item_label = item_instance.Item_Label;              // 设置 Item名称
+        item_image.sprite = item_instance.Item_Image;       // 设置 Item图片
     }
+    
+
+
+    public void Update_Item(Item item, int amount)      // 设置 Item实例 和 拥有的Item数量
+    {
+        item_instance = item;
+        // item_label = item_instance.Item_Label;              // 设置 Item名称
+        item_image.sprite = item_instance.Item_Image;       // 设置 Item图片
+        item_amount.text = amount.ToString();
+    }
+    
+    
+    
+    
+    ////// 点击、悬停 时触发的操作
+    
+    
+    public void OnClick()
+    {
+        Debug.Log($"你点击了 {item_instance.Item_Id}");
+    }
+
+    public void OnHover()
+    {
+        
+    }
+    
+    
+    //------------------------------------------------------------------------------------------------------------------
     
     
 }

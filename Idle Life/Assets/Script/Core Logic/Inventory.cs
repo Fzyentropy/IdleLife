@@ -8,21 +8,28 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     
-    ////// 所有 Item 索引
+    //------------------------------------------------------------------------------------------------------------------
+    // 所有 Item 索引
 
     public List<Item_Scriptable> All_Item_Scriptables;         // 所有 Item 集合索引
     public List<Item> All_Items;     // 备选方案，所有 Item 集合索引，使用 Item 类实例
     
-    ////// 玩家当前拥有的 Item
+    //------------------------------------------------------------------------------------------------------------------
+    // 玩家当前拥有的 Item
     
     public int Player_Inventory_Slot_Amount { get; private set; }        // 玩家仓库大小，能存储的 Item 数量
     [ShowInInspector] public Dictionary<string, int> Player_Items { get; private set; }     // 玩家所拥有的 Item,  string (Item名称),  int (Item数量)  @@@@@@@@@@@
     // public Dictionary<Item, int> Player_Items;    // 备选方案，使用 Item实例 Dictionary
     
-    //////  Inventory 唯一实例
+    //------------------------------------------------------------------------------------------------------------------
+    // Inventory 更新事件
+
+    public event Action On_Inventory_Update; 
+    
+    //------------------------------------------------------------------------------------------------------------------
+    // 系统参数：Inventory 单例, Resource 路径
 
     public static Inventory IVT;
-
     private const string PATH_ITEMS = "Scriptable_Objects/Items";
     
     
@@ -41,8 +48,10 @@ public class Inventory : MonoBehaviour
 
     
 
-    ////// 初始化所有 Item 索引
+    
+    ////// 所有 Item 的初始化(Item Scriptable => Item), 索引, 加载玩家 Item  ---------------------------------------------
 
+    
     private void Load_All_Items_From_Folder()       // 从 Resources 文件夹加载所有 Item_Scriptable，并转化成 Item 实例存储进 Item List
     {
         All_Items = new List<Item>();
@@ -79,6 +88,7 @@ public class Inventory : MonoBehaviour
                 {
                     Item_Id = item_NormalItem_instance.Item_Id,
                     Item_Label = item_NormalItem_instance.Item_Label,
+                    Item_Image = item_NormalItem_instance.Item_Sprite,
                     Item_Type = item_NormalItem_instance.Item_Type
                 };
                 
@@ -99,6 +109,7 @@ public class Inventory : MonoBehaviour
                 {
                     Item_Id = item_ShopPurchase_instance.Item_Id,
                     Item_Label = item_ShopPurchase_instance.Item_Label,
+                    Item_Image = item_ShopPurchase_instance.Item_Sprite,
                     Item_Type = item_ShopPurchase_instance.Item_Type,
                     
                     // 商店购买物品 的特殊属性
@@ -123,6 +134,7 @@ public class Inventory : MonoBehaviour
                 {
                     Item_Id = item_NormalItem_instance.Item_Id,
                     Item_Label = item_NormalItem_instance.Item_Label,
+                    Item_Image = item_NormalItem_instance.Item_Sprite,
                     Item_Type = item_NormalItem_instance.Item_Type
                 };
                 
@@ -139,15 +151,24 @@ public class Inventory : MonoBehaviour
     }
 
 
+    public Item Get_Item_By_ID_From_IVT(string item_id)             // 通过一个 ID string 获取 Item 实例的方法
+    {
+        return All_Items.FirstOrDefault(item => item.Item_Id == item_id);
+    }
+    
+
 
     public void Load_Player_Inventory()         // 初始化/加载 玩家 Inventory Dictionary
     {
+        // TODO 将来修改为从存档中加载数据
+        
         Player_Items = new Dictionary<string, int>();
         Player_Inventory_Slot_Amount = 10;
     }
-    
-    
-    
+
+
+
+    //------------------------------------------------------------------------------------------------------------------
     
     
     
@@ -168,6 +189,8 @@ public class Inventory : MonoBehaviour
             Player_Items.Add(itemID,itemAmount);    // 添加该物品
         }
         
+        On_Inventory_Update?.Invoke();      // 触发 Inventory 更新事件
+        
     }
 
 
@@ -183,6 +206,7 @@ public class Inventory : MonoBehaviour
 
         }
         
+        On_Inventory_Update?.Invoke();      // 触发 Inventory 更新事件
     }
 
 
