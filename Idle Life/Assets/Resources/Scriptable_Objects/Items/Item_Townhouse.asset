@@ -16,4 +16,14 @@ MonoBehaviour:
   Item_Label: Town House
   Item_Sprite: {fileID: 21300000, guid: 8448a5a23a7d35645a01b7c03582d9df, type: 3}
   Item_Type: ShopPurchase
+  item_modules:
+  - rid: 4257132161213399048
   Item_Purchase_Price: 1200
+  references:
+    version: 2
+    RefIds:
+    - rid: 4257132161213399048
+      type: {class: ItemModule_ShopItem, ns: , asm: Assembly-CSharp}
+      data:
+        Item_Price: 1200
+        Item_Total_Amount: 30

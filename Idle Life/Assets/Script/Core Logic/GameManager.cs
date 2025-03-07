@@ -1,40 +1,59 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Unity.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //------------------------------------------------------------------------------------------------------------------
+    // 玩家各项参数状态 Player Stats - 保存主体 Save Section
+    [Space(5)][Header("玩家状态 Player Stats")]
     
-    ///////////////////////    玩家各项参数状态 Player Stats - 保存主体 Save Section
+    //// 金钱
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Money;      // 玩家拥有的金钱数 
+
+    //// 体力值
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina { get; private set; }           // 玩家体力值
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina_Max { get; private set; }       // 玩家体力值上限
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina_Base_Restore_Rate = 1f;         // 体力恢复速率 /每秒 (基础值)
+    [Sirenix.OdinInspector.ReadOnly] public bool can_restore_stamina = true;                     // 是否可以回复体力值 (体力回复锁)
+    
+    //// 饥饿值 (饱腹值) (0 - 2)
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety = 1f;         // 玩家饱腹值
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety_Max = 2f;     // 玩家饱腹值上限
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety_Reduce_Rate = .005f;         // 玩家饱腹值减少速率
+    
+    // 玩家的各能力等级 (含当前等级和经验值)
+    public Dictionary<string, Ability> Player_Ability;    
     
     
-    public float Player_Money;      // 玩家拥有的金钱数 
+    //------------------------------------------------------------------------------------------------------------------
+    // 玩家状态 Player Stats 临时调试参数
+    [Space(5)][Header("临时设置 - 玩家开局状态")]
 
-    public float Player_Stamina { get; private set; } // 玩家体力值
-    public float Player_Stamina_Max { get; private set; } // 玩家体力值上限
-    public float Player_Stamina_Restore_Rate = 1f;
+    public float temp_player_money;         // 临时设置，玩家开局金钱
+    public float temp_player_stamina;       // 临时设置，玩家开局体力值
+    public float temp_player_stamina_max;   // 临时设置，玩家开局体力上限
+    public float temp_player_satiety;       // 临时设置，玩家开局饱腹值
     
-    public Dictionary<string, Ability> Player_Ability;    // 玩家的能力值
-
-
-
-
-    ////////////////////////     游戏各项执行系统，交互逻辑  Game Interaction and Implementation system
+    
+    //------------------------------------------------------------------------------------------------------------------
+    // 游戏各项执行系统，交互逻辑  Game Interaction and Implementation system
 
     public static GameManager GM;       // 唯一管理员
-    
-    public static ActivityManager Game_ActivityManager;        // 唯一活动管理器
 
-    
-    
+
+
     ////////////////////////     所有配置、路径参数
 
     public const string PATH_SCRIPTABLE_OBJECTS_ABILITY = "Scriptable_Objects/AbilityInstance";
     
     
     
-    ////////////////////////     Awake, Start, Update
+    //------------------------------------------------------------------------------------------------------------------
+    // Awake, Start, Update
     
     private void Awake()
     {
@@ -42,55 +61,57 @@ public class GameManager : MonoBehaviour
         LoadAllAbilities();
     }
 
+    
     private void Start()
     {
-        Change_Player_Stamina_Max(300);
-        Change_Player_Stamina(250);
+        Set_Player_Stats_Temp();    // 临时，调试用，设置玩家开局属性 - 实际调用
     }
 
+    private void Set_Player_Stats_Temp()    // 临时，调试用，设置玩家开局属性 - 具体方法
+    {
+        Change_Player_Money(temp_player_money);              // 临时设置金钱
+        Change_Player_Stamina_Max(temp_player_stamina_max);  // 临时设置体力上限
+        Change_Player_Stamina(temp_player_stamina);          // 临时设置体力值
+        Change_Player_Satiety(temp_player_satiety);          // 临时设置饱腹值
+    }
+
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    // 玩家状态参数变更方法
     
     
-    
-    ////////////////////////     玩家状态参数变更方法
-    
-    
-    public void Change_Player_Stamina(float stamina_change_amount)
+    public void Change_Player_Stamina(float stamina_change_amount)      // 变更玩家体力值（可输入负值）
     {
         Player_Stamina += stamina_change_amount;
+        
+        //若此时玩家体力值大于上限，则将体力值设置为上限值
+        if (Player_Stamina > Player_Stamina_Max) 
+            Player_Stamina = Player_Stamina_Max;
     }
     
-    public void Change_Player_Stamina_Max(float stamina_max_change_amount)
+    public void Change_Player_Stamina_Max(float stamina_max_change_amount)      // 变更玩家体力上限
     {
         Player_Stamina_Max += stamina_max_change_amount;
-
-        if (Player_Stamina > Player_Stamina_Max)        // 若此时玩家体力值大于上限，则将体力值设置为上限值
+        
+        //若此时玩家体力值大于上限，则将体力值设置为上限值
+        if (Player_Stamina > Player_Stamina_Max) 
             Player_Stamina = Player_Stamina_Max;
     }
 
-    public void Change_Player_Money(float money_change_amount)
+    public void Change_Player_Money(float money_change_amount)          // 变更玩家金钱（可输入负值）
     {
         Player_Money += money_change_amount;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-    ////////////////////////     游戏数据初始化 - 加载 Scriptable Object 和 JSON
+    public void Change_Player_Satiety(float satiety_change_amount)      // 变更玩家饱腹值（可输入负值）
+    {
+        Player_Satiety += satiety_change_amount;
+    }
+    
+    
+    //------------------------------------------------------------------------------------------------------------------
+    // 游戏数据初始化 - 加载 Scriptable Object 和 JSON
     
     
     /// TODO 保存和加载功能
@@ -133,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
 
     
-    
+    //------------------------------------------------------------------------------------------------------------------
     
     
     

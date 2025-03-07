@@ -16,4 +16,14 @@ MonoBehaviour:
   Item_Label: Food
   Item_Sprite: {fileID: 21300000, guid: 862dd81155617054cba681d53d7d71d3, type: 3}
   Item_Type: ShopPurchase
+  item_modules:
+  - rid: 4257132161213399047
   Item_Purchase_Price: 10
+  references:
+    version: 2
+    RefIds:
+    - rid: 4257132161213399047
+      type: {class: ItemModule_Use, ns: , asm: Assembly-CSharp}
+      data:
+        use_funcs:
+        - {fileID: 11400000, guid: 5aae46b692f0d6e4d957df2e59487d94, type: 2}

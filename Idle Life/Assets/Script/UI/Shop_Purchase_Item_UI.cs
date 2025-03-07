@@ -10,7 +10,7 @@ using UniRx;
 public class Shop_Purchase_Item_UI : MonoBehaviour
 {
     [Header("Item Scriptable Object")]
-    public Item_ShopPurchase_Scriptable Item_Instance;
+    public Item_Scriptable_ShopItem Item_Instance;
 
     [Header("UI")]
     public TMP_Text itemName;

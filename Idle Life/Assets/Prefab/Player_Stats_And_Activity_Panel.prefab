@@ -1691,7 +1691,7 @@ GameObject:
   - component: {fileID: 4312814207088161179}
   - component: {fileID: 4312814207088161178}
   m_Layer: 5
-  m_Name: Player_Stats_Activity_Panel
+  m_Name: Player_Stats_And_Activity_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -80,7 +80,31 @@ public class Inventory : MonoBehaviour
 
     private Item Create_Item_From_Scriptable(Item_Scriptable itemScriptable)
     {
-        if (itemScriptable is Item_NormalItem_Scriptable item_NormalItem_instance)
+        
+        if (itemScriptable is Item_Scriptable item_instance)
+        {
+            try
+            {
+                var item = new Item_NormalItem()        // 普通物品
+                {
+                    Item_Id = item_instance.Item_Id,
+                    Item_Label = item_instance.Item_Label,
+                    Item_Image = item_instance.Item_Sprite,
+                    Item_Type = item_instance.Item_Type,
+                    
+                    Item_Modules = DeepCopyModules(item_instance.item_modules)
+                };
+                
+                return item;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"加载物品{item_instance.Item_Id}失败: {e.Message}");
+                return null;
+            }
+        }
+        
+        if (itemScriptable is Item_Scriptable_NormalItem item_NormalItem_instance)
         {
             try
             {
@@ -89,7 +113,9 @@ public class Inventory : MonoBehaviour
                     Item_Id = item_NormalItem_instance.Item_Id,
                     Item_Label = item_NormalItem_instance.Item_Label,
                     Item_Image = item_NormalItem_instance.Item_Sprite,
-                    Item_Type = item_NormalItem_instance.Item_Type
+                    Item_Type = item_NormalItem_instance.Item_Type,
+                    
+                    Item_Modules = DeepCopyModules(item_NormalItem_instance.item_modules)
                 };
                 
                 return item;
@@ -101,7 +127,7 @@ public class Inventory : MonoBehaviour
             }
         }
         
-        if (itemScriptable is Item_ShopPurchase_Scriptable item_ShopPurchase_instance)
+        if (itemScriptable is Item_Scriptable_ShopItem item_ShopPurchase_instance)
         {
             try
             {
@@ -111,6 +137,8 @@ public class Inventory : MonoBehaviour
                     Item_Label = item_ShopPurchase_instance.Item_Label,
                     Item_Image = item_ShopPurchase_instance.Item_Sprite,
                     Item_Type = item_ShopPurchase_instance.Item_Type,
+                    
+                    Item_Modules = DeepCopyModules(item_ShopPurchase_instance.item_modules),
                     
                     // 商店购买物品 的特殊属性
                     Item_Purchase_Price = item_ShopPurchase_instance.Item_Purchase_Price
@@ -148,6 +176,36 @@ public class Inventory : MonoBehaviour
         }*/
 
         return null;
+    }
+    
+    
+    private List<ItemModule> DeepCopyModules(List<ItemModule> source)
+    {
+        var copy = new List<ItemModule>();
+        foreach (var module in source)
+        {
+            // 实现深拷贝逻辑，可以使用JSON序列化等方式
+            // 这里使用简单的手动拷贝示例
+            if (module is ItemModule_Upgrade upgrade)
+            {
+                copy.Add(new ItemModule_Upgrade() { expRequired = upgrade.expRequired, Upgrade_To = upgrade.Upgrade_To});
+            }
+            else if (module is ItemModule_ShopItem shopItem)
+            {
+                copy.Add(new ItemModule_ShopItem() { Item_Price = shopItem.Item_Price, Item_Total_Amount = shopItem.Item_Total_Amount});
+            }
+            else if (module is ItemModule_Equipment equipment)
+            {
+                copy.Add(new ItemModule_Equipment() { Equipment_Type = equipment.Equipment_Type});
+            }
+            else if (module is ItemModule_Use use)
+            {
+                copy.Add(new ItemModule_Use(){use_funcs = use.use_funcs});
+            }
+            
+            // 添加其他模块的拷贝逻辑  TODO 扩展 Item Module
+        }
+        return copy;
     }
 
 
