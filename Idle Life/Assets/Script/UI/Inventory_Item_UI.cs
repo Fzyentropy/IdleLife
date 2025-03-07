@@ -79,9 +79,12 @@ public class Inventory_Item_UI : MonoBehaviour, IPointerClickHandler, IPointerEn
     
     public void Click_Item()
     {
+        // Debug.Log(Check_Item_Info());
         
-        Debug.Log(Check_Item_Info());
-        
+        if (PanelManager.PM.Current_Open_Item != null && PanelManager.PM.Current_Open_Item == item_instance)
+            PanelManager.PM.Close_Item_Info_Panel();
+        else
+            PanelManager.PM.Open_Item_Info_Panel(item_instance);
     }
 
     public void Hover_Item()
@@ -98,7 +101,8 @@ public class Inventory_Item_UI : MonoBehaviour, IPointerClickHandler, IPointerEn
     //------------------------------------------------------------------------------------------------------------------
 
 
-    public string Check_Item_Info()
+    // 检测Item的Scriptable Object 实例是否能顺利储存inspector中设置的数据（能否正确序列化）
+    public string Check_Item_Info()         
     {
         string log = new string(
             $"你点击了 {item_instance.Item_Label} " +

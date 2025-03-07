@@ -8,6 +8,7 @@ public class Item_Scriptable : ScriptableObject
     public string Item_Id;
     public string Item_Label;
     public Sprite Item_Sprite;
+    public string Item_Description;
     public string Item_Type;      // 此 Item Type 为主观、从游戏设计视角的软分类，与下方 ItemType 枚举不同
 
     [Space(5)]

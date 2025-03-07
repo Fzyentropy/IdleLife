@@ -90,6 +90,7 @@ public class Inventory : MonoBehaviour
                     Item_Id = item_instance.Item_Id,
                     Item_Label = item_instance.Item_Label,
                     Item_Image = item_instance.Item_Sprite,
+                    Item_Description = item_instance.Item_Description,
                     Item_Type = item_instance.Item_Type,
                     
                     Item_Modules = DeepCopyModules(item_instance.item_modules)
@@ -113,6 +114,7 @@ public class Inventory : MonoBehaviour
                     Item_Id = item_NormalItem_instance.Item_Id,
                     Item_Label = item_NormalItem_instance.Item_Label,
                     Item_Image = item_NormalItem_instance.Item_Sprite,
+                    Item_Description = item_NormalItem_instance.Item_Description,
                     Item_Type = item_NormalItem_instance.Item_Type,
                     
                     Item_Modules = DeepCopyModules(item_NormalItem_instance.item_modules)
@@ -136,6 +138,7 @@ public class Inventory : MonoBehaviour
                     Item_Id = item_ShopPurchase_instance.Item_Id,
                     Item_Label = item_ShopPurchase_instance.Item_Label,
                     Item_Image = item_ShopPurchase_instance.Item_Sprite,
+                    Item_Description = item_ShopPurchase_instance.Item_Description,
                     Item_Type = item_ShopPurchase_instance.Item_Type,
                     
                     Item_Modules = DeepCopyModules(item_ShopPurchase_instance.item_modules),

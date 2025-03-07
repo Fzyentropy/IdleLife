@@ -31,6 +31,12 @@ public class ItemModule_Equipment : ItemModule        // 升级模块
 }
 
 [Serializable]
+public class ItemModule_Sell : ItemModule        // 升级模块
+{
+    public int Sell_Price;
+}
+
+[Serializable]
 public class ItemModule_Use : ItemModule        // 使用模块
 {
     [SerializeField]
