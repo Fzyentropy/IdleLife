@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item_Id: FoodRaw_Chicken
   Item_Label: "\u751F\u9E21\u817F"
-  Item_Sprite: {fileID: 21300000, guid: 862dd81155617054cba681d53d7d71d3, type: 3}
-  Item_Description: "\u751F\u9E21\u817F\uFF0C\u70F9\u996A\u7684\u539F\u6750\u6599"
+  Item_Sprite: {fileID: 21300000, guid: df444587af0c8bd4b92fb2e41686d07b, type: 3}
+  Item_Description: "\u751F\u9E21\u817F\uFF0C\u70F9\u98DF\u7684\u539F\u6750\u6599"
   Item_Type: FoodRaw
   item_modules:
   - rid: 4257132227626795011
@@ -27,4 +27,4 @@ MonoBehaviour:
       data:
         Item_Price: 10
         Item_Total_Amount: 999
-        Shop_Item_Description: "\u53EF\u4EE5\u901A\u8FC7\u70F9\u8C03\u5C06\u5176\u53D8\u4E3A\u53EF\u98DF\u7528\u7684\u98DF\u7269"
+        Shop_Item_Description: "\u53EF\u4EE5\u901A\u8FC7\u70F9\u98DF\u5C06\u5176\u53D8\u4E3A\u53EF\u98DF\u7528\u7684\u98DF\u7269"

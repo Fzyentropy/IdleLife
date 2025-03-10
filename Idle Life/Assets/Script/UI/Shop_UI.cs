@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UniRx;
 using UnityEngine;
 
 public class Shop_UI : MonoBehaviour
@@ -7,6 +9,7 @@ public class Shop_UI : MonoBehaviour
     [Header("Shop UI")]
     public GameObject shop_layout;      // 含 Grid Layout Group 的 Shop Item 们的父对象
     public GameObject shopitem_prefab;      // Shop Item 的 prefab
+    public TMP_Text playerMoneyText;    // 玩家金钱数     
     
     private void Start()
     {
@@ -49,9 +52,18 @@ public class Shop_UI : MonoBehaviour
             shop_item_ui.Shop_Item_Instance = shopItem;     // 设置 Shop Item prefab 上 UI 脚本 的 Shop Item 实例
         }
         
-        
+        Start_Update_Player_Money();
     }
-    
+
+    void Start_Update_Player_Money()
+    {
+        GameManager.GM.ObserveEveryValueChanged(gm => gm.Player_Money)
+            .Subscribe(money =>
+            {
+                playerMoneyText.text = $"{(int)money}";
+                
+            }).AddTo(this);
+    }
     
     
 }

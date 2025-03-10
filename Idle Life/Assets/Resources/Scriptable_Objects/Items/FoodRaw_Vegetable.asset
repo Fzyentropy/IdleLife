@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce141641c0661b142a2c6eb5ed41f936, type: 3}
-  m_Name: FoodRaw_Vege
+  m_Name: FoodRaw_Vegetable
   m_EditorClassIdentifier: 
-  Item_Id: FoodRaw_Vege
+  Item_Id: FoodRaw_Vegetable
   Item_Label: "\u852C\u83DC"
-  Item_Sprite: {fileID: 21300000, guid: 862dd81155617054cba681d53d7d71d3, type: 3}
-  Item_Description: "\u852C\u83DC\uFF0C\u53EF\u4EE5\u4F5C\u4E3A\u591A\u79CD\u83DC\u80B4\u7684\u914D\u83DC"
+  Item_Sprite: {fileID: 21300000, guid: 88c03f19644edf64e8af8b337fa4fb11, type: 3}
+  Item_Description: "\u852C\u83DC\uFF0C\u53EF\u4EE5\u4F5C\u4E3A\u591A\u79CD\u83DC\u5F0F\u7684\u914D\u83DC"
   Item_Type: FoodRaw
   item_modules:
   - rid: 4257132227626795012
@@ -27,4 +27,4 @@ MonoBehaviour:
       data:
         Item_Price: 5
         Item_Total_Amount: 999
-        Shop_Item_Description: "\u53EF\u4EE5\u901A\u8FC7\u70F9\u8C03\u5236\u4F5C\u53EF\u98DF\u7528\u7684\u98DF\u7269"
+        Shop_Item_Description: "\u53EF\u4EE5\u901A\u8FC7\u70F9\u98DF\u5236\u4F5C\u53EF\u98DF\u7528\u7684\u98DF\u7269"
