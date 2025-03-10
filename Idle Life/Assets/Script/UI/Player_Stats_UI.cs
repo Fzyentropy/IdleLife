@@ -54,18 +54,20 @@ public class Player_Stats_UI : MonoBehaviour
         GameManager.GM.ObserveEveryValueChanged(gm => gm.Player_Satiety)
             .CombineLatest(
                 GameManager.GM.ObserveEveryValueChanged(gm => gm.Player_Satiety_Max),
-                (current, max) => new { current, max })
+                GameManager.GM.ObserveEveryValueChanged(gm => gm.Player_Satiety_Min),
+                (current, max,min) => new { current, max, min })
             .Subscribe(satiety => {
                 
                 // 设置进度条
-                _satietySlider.maxValue = satiety.max / 2;
-                _satietySlider.value = satiety.current / 2;
+                _satietySlider.maxValue = satiety.max;
+                _satietySlider.minValue = satiety.min;
+                _satietySlider.value = satiety.current;
                 
                 // 设置文本显示
-                _satietyText.text = $"{satiety.current:F1} / {satiety.max:F0}";
+                _satietyText.text = $"{satiety.current:F1} / {satiety.max:F1}";
 
                 // 设置进度条颜色
-                if (satiety.current < satiety.max / 2)
+                if (satiety.current < 0)
                     _satietyFill.color = _satietyHungryColor;
                 else
                     _satietyFill.color = _satietyFullColor;

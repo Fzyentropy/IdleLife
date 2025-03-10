@@ -22,9 +22,10 @@ public class SideLogicManager : MonoBehaviour
 
     private float Calculate_Player_Stamina_Restore_Rate()     // 计算玩家体力值回复速率，一直启用
     {
+
         return
             GameManager.GM.Player_Stamina_Base_Restore_Rate     // 基础回复速率
-            * GameManager.GM.Player_Satiety * GameManager.GM.Player_Satiety   // 饱腹值影响：Player_Satiety 饱腹值的平方
+            * GameManager.GM.Player_Satiety  // 饱腹值影响：Player_Satiety 饱腹值的平方
             ;
     }
 

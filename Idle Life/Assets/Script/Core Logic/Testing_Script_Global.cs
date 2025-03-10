@@ -68,8 +68,8 @@ public class Testing_Script_Global : MonoBehaviour
     public void Put_Item_To_Inventory_At_Start()        // 开局往 Inventory 放入一些 Item - 具体实现
     {
         Inventory.IVT.Player_Items.Add("Item_Townhouse", 2);
-        Inventory.IVT.Player_Items.Add("Item_Food", 3);
-        Inventory.IVT.Player_Items.Add("Item_Sword", 1);
+        Inventory.IVT.Player_Items.Add("Food", 3);
+        Inventory.IVT.Player_Items.Add("Weapon_Sword", 1);
         Debug.Log("Item 已添加");
     }
     

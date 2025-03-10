@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35638598420baa14292e174279843790, type: 3}
+  m_Name: Weapon_Sword
+  m_EditorClassIdentifier: 
+  Item_Id: Weapon_Sword
+  Item_Label: Sword
+  Item_Sprite: {fileID: 21300000, guid: daf2ab606d4db0d4f9ecf4c02137d2a8, type: 3}
+  Item_Description: 
+  Item_Type: Equipment
+  item_modules:
+  - rid: 4257132161213399049
+  - rid: 4257132161213399050
+  references:
+    version: 2
+    RefIds:
+    - rid: 4257132161213399049
+      type: {class: ItemModule_Upgrade, ns: , asm: Assembly-CSharp}
+      data:
+        expRequired: 730
+        Upgrade_To: Sword_2
+    - rid: 4257132161213399050
+      type: {class: ItemModule_Equipment, ns: , asm: Assembly-CSharp}
+      data:
+        Equipment_Type: Weapon

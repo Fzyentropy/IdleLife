@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -21,6 +22,12 @@ public class Inventory : MonoBehaviour
     [ShowInInspector] public Dictionary<string, int> Player_Items { get; private set; }     // 玩家所拥有的 Item,  string (Item名称),  int (Item数量)  @@@@@@@@@@@
     // public Dictionary<Item, int> Player_Items;    // 备选方案，使用 Item实例 Dictionary
     
+    
+    //------------------------------------------------------------------------------------------------------------------
+    // 商店物品
+
+    public List<Item> Shop_Items;      // 商店列表
+
     //------------------------------------------------------------------------------------------------------------------
     // Inventory 更新事件
 
@@ -48,13 +55,14 @@ public class Inventory : MonoBehaviour
 
     
 
-    
-    ////// 所有 Item 的初始化(Item Scriptable => Item), 索引, 加载玩家 Item  ---------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+    // 所有 Item 的初始化(Item Scriptable => Item), 索引, 加载玩家 Item
 
     
     private void Load_All_Items_From_Folder()       // 从 Resources 文件夹加载所有 Item_Scriptable，并转化成 Item 实例存储进 Item List
     {
         All_Items = new List<Item>();
+        Shop_Items = new List<Item>();
         
         // 加载所有 Item Scriptable
         var itemArray = Resources.LoadAll<Item_Scriptable>(PATH_ITEMS);
@@ -62,13 +70,21 @@ public class Inventory : MonoBehaviour
         foreach (var item_scriptable in itemArray)
         {
             var _item = Create_Item_From_Scriptable(item_scriptable);
+            
             if (_item != null)
             {
-                All_Items.Add(_item);
+                // 加入所有物品列表 All_Items
+                All_Items.Add(_item);       
+                
+                // 若有 Sell 模块，则加入商店
+                if (_item.Item_Modules.Any(module => module is ItemModule_ShopItem))    
+                {
+                    Shop_Items.Add(_item);
+                }
             }
         }
         
-        Debug.Log($"已加载{All_Items.Count}项活动");
+        Debug.Log($"总共加载{All_Items.Count}个物品，{Shop_Items.Count}个商店物品");
 
     }
 
@@ -93,7 +109,7 @@ public class Inventory : MonoBehaviour
                     Item_Description = item_instance.Item_Description,
                     Item_Type = item_instance.Item_Type,
                     
-                    Item_Modules = DeepCopyModules(item_instance.item_modules)
+                    Item_Modules = Deep_Copy_Modules(item_instance.item_modules)
                 };
                 
                 return item;
@@ -117,7 +133,7 @@ public class Inventory : MonoBehaviour
                     Item_Description = item_NormalItem_instance.Item_Description,
                     Item_Type = item_NormalItem_instance.Item_Type,
                     
-                    Item_Modules = DeepCopyModules(item_NormalItem_instance.item_modules)
+                    Item_Modules = Deep_Copy_Modules(item_NormalItem_instance.item_modules)
                 };
                 
                 return item;
@@ -141,7 +157,7 @@ public class Inventory : MonoBehaviour
                     Item_Description = item_ShopPurchase_instance.Item_Description,
                     Item_Type = item_ShopPurchase_instance.Item_Type,
                     
-                    Item_Modules = DeepCopyModules(item_ShopPurchase_instance.item_modules),
+                    Item_Modules = Deep_Copy_Modules(item_ShopPurchase_instance.item_modules),
                     
                     // 商店购买物品 的特殊属性
                     Item_Purchase_Price = item_ShopPurchase_instance.Item_Purchase_Price
@@ -182,7 +198,7 @@ public class Inventory : MonoBehaviour
     }
     
     
-    private List<ItemModule> DeepCopyModules(List<ItemModule> source)
+    private List<ItemModule> Deep_Copy_Modules(List<ItemModule> source)         // 深拷贝 ItemModule List
     {
         var copy = new List<ItemModule>();
         foreach (var module in source)
@@ -191,34 +207,44 @@ public class Inventory : MonoBehaviour
             // 这里使用简单的手动拷贝示例
             if (module is ItemModule_Upgrade upgrade)
             {
-                copy.Add(new ItemModule_Upgrade() { expRequired = upgrade.expRequired, Upgrade_To = upgrade.Upgrade_To});
+                copy.Add(new ItemModule_Upgrade()
+                {
+                    expRequired = upgrade.expRequired, 
+                    Upgrade_To = upgrade.Upgrade_To
+                });
             }
             else if (module is ItemModule_ShopItem shopItem)
             {
-                copy.Add(new ItemModule_ShopItem() { Item_Price = shopItem.Item_Price, Item_Total_Amount = shopItem.Item_Total_Amount});
+                copy.Add(new ItemModule_ShopItem()
+                {
+                    Item_Price = shopItem.Item_Price, 
+                    Item_Total_Amount = shopItem.Item_Total_Amount,
+                    Shop_Item_Description = shopItem.Shop_Item_Description
+                });
             }
             else if (module is ItemModule_Equipment equipment)
             {
-                copy.Add(new ItemModule_Equipment() { Equipment_Type = equipment.Equipment_Type});
+                copy.Add(new ItemModule_Equipment()
+                {
+                    Equipment_Type = equipment.Equipment_Type
+                });
             }
             else if (module is ItemModule_Use use)
             {
-                copy.Add(new ItemModule_Use(){use_funcs = use.use_funcs});
+                copy.Add(new ItemModule_Use()
+                {
+                    use_funcs = use.use_funcs
+                });
             }
             
-            // 添加其他模块的拷贝逻辑  TODO 扩展 Item Module
+            // + 添加其他模块的拷贝逻辑  TODO 扩展 Item Module
+
         }
         return copy;
     }
-
-
-    public Item Get_Item_By_ID_From_IVT(string item_id)             // 通过一个 ID string 获取 Item 实例的方法
-    {
-        return All_Items.FirstOrDefault(item => item.Item_Id == item_id);
-    }
     
-
-
+    
+    
     public void Load_Player_Inventory()         // 初始化/加载 玩家 Inventory Dictionary
     {
         // TODO 将来修改为从存档中加载数据
@@ -226,6 +252,34 @@ public class Inventory : MonoBehaviour
         Player_Items = new Dictionary<string, int>();
         Player_Inventory_Slot_Amount = 10;
     }
+
+    
+    
+    //------------------------------------------------------------------------------------------------------------------
+    // Player_Items Dictionary 相关操作
+
+    public Item Get_Item_By_ID_From_IVT(string item_id)             // 通过一个 ID string 获取 Item 实例的方法
+    {
+        return All_Items.FirstOrDefault(item => item.Item_Id == item_id);
+    }
+
+    public bool Has_Item(string item_id)                      // 判断玩家是否有某个 Item (输入 Item ID string)
+    {
+        if (Player_Items.ContainsKey(item_id))
+            return true;
+
+        return false;
+    }
+    public bool Has_Item(Item item)                           // 判断玩家是否有某个 Item (输入 Item 实例)
+    {
+        if (Player_Items.ContainsKey(item.Item_Id))
+            return true;
+
+        return false;
+    }
+
+
+    
 
 
 

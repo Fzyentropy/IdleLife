@@ -12,16 +12,28 @@ public class Testing_Script_Panel : MonoBehaviour
 
     
 
-    public void Add_Item()
+    public void Add_Townhouse()
     {
         Inventory.IVT.Add_Item_To_Inventory("Item_Townhouse", 1);
-        Debug.Log("TESTING: Item Added");
+        Debug.Log("TESTING: Townhouse Added");
     }
 
-    public void Remove_Item()
+    public void Remove_Townhouse()
     {
         Inventory.IVT.Remove_Item_From_Inventory("Item_Townhouse",1);
-        Debug.Log("TESTING: Item Removed");
+        Debug.Log("TESTING: Townhouse Removed");
+    }
+    
+    public void Add_Food()
+    {
+        Inventory.IVT.Add_Item_To_Inventory("Food", 1);
+        Debug.Log("TESTING: Food Added");
+    }
+    
+    public void Remove_Food()
+    {
+        Inventory.IVT.Remove_Item_From_Inventory("Food",1);
+        Debug.Log("TESTING: Food Removed");
     }
     
 

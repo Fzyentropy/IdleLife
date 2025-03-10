@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class PanelManager : MonoBehaviour
     [Space(10)][Header("Side Panel 们")]
     [Space(5)][Header("右侧物品信息 Panel")] 
     public Item_Info_Panel_UI Item_Info_Panel;     // Item Info Panel 指代，即Item具体信息和操作的Panel，将场景中Panel拖拽至此
-    [Sirenix.OdinInspector.ReadOnly] public Item Current_Open_Item;   // 当前 Item Info Panel 显示的 Item
+    [Sirenix.OdinInspector.ReadOnly] [CanBeNull] public Item Current_Open_Item;   // 当前 Item Info Panel 显示的 Item
     
     
 
@@ -40,6 +41,8 @@ public class PanelManager : MonoBehaviour
     private void Start()
     {
         Check_All_Panel_Setup();
+        Check_Item_Panel_Validation();
+        Inventory.IVT.On_Inventory_Update += Check_Item_Panel_Validation;
     }
 
 
@@ -126,6 +129,25 @@ public class PanelManager : MonoBehaviour
     {
         Item_Info_Panel.gameObject.SetActive(false);
         Current_Open_Item = null;
+    }
+
+    void Check_Item_Panel_Validation()  // 检查当前打开的Item 是否还在Inventory中拥有，以防因其他活动消耗掉物品时还能继续使用
+    {
+        if (Current_Open_Item != null)
+        {
+            // 如果没有该 Item，则关闭 Panel
+            if (!Inventory.IVT.Has_Item(Current_Open_Item)) 
+            {
+                Close_Item_Info_Panel();
+            }
+            
+            // 如果有，则更新一下信息
+            else
+            {
+                Item_Info_Panel.Check_And_Set_Panel();    // 刷新 Item Info Panel
+            }
+        }
+        
     }
     
     

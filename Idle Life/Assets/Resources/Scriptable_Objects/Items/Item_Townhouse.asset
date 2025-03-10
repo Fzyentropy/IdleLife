@@ -15,6 +15,7 @@ MonoBehaviour:
   Item_Id: Item_Townhouse
   Item_Label: Town House
   Item_Sprite: {fileID: 21300000, guid: 8448a5a23a7d35645a01b7c03582d9df, type: 3}
+  Item_Description: 
   Item_Type: ShopPurchase
   item_modules:
   - rid: 4257132161213399048
@@ -27,3 +28,4 @@ MonoBehaviour:
       data:
         Item_Price: 1200
         Item_Total_Amount: 30
+        Shop_Item_Description: "\u975E\u5E38\u6602\u8D35\u7684\u5EFA\u7B51"

@@ -78,7 +78,6 @@ public class Inventory_UI : MonoBehaviour
             inventory_item_ui.Update_Item(Inventory.IVT.Get_Item_By_ID_From_IVT(item.Key), item.Value);     // 设置 prefab 的 Item 实例和 Item 的数量
         }
         
-        Debug.Log("Inventory Refreshed!");
     }
     
 

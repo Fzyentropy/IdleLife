@@ -15,6 +15,7 @@ public class ItemModule_ShopItem : ItemModule       // 商店物品
 {
     public int Item_Price;     // 购买价格
     public int Item_Total_Amount;
+    public string Shop_Item_Description;    // 商店中的物品描述
 }
 
 [Serializable]
@@ -44,11 +45,14 @@ public class ItemModule_Use : ItemModule        // 使用模块
 
     public void UseItems(Item item)
     {
-        if (use_funcs == null) return;
-
-        foreach (var use_func in use_funcs)
+        if (use_funcs != null)
         {
-            use_func.Use_Item(item);
+            foreach (var use_func in use_funcs)
+            {
+                use_func.Use_Item(item);
+            }
         }
+        
+        Inventory.IVT.Remove_Item_From_Inventory(item.Item_Id, 1);      // 用掉 1个 Item
     }
 }

@@ -17,11 +17,12 @@ public class GameManager : MonoBehaviour
     //// 体力值
     [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina { get; private set; }           // 玩家体力值
     [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina_Max { get; private set; }       // 玩家体力值上限
-    [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina_Base_Restore_Rate = 1f;         // 体力恢复速率 /每秒 (基础值)
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Stamina_Base_Restore_Rate = .5f;         // 体力恢复速率 /每秒 (基础值)
     [Sirenix.OdinInspector.ReadOnly] public bool can_restore_stamina = true;                     // 是否可以回复体力值 (体力回复锁)
     
-    //// 饥饿值 (饱腹值) (0 - 2)
-    [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety = 1f;         // 玩家饱腹值
+    //// 饥饿值 (饱腹值) (-1 - 2)
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety;         // 玩家饱腹值
+    [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety_Min = -1f;     // 玩家饱腹值下限
     [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety_Max = 2f;     // 玩家饱腹值上限
     [Sirenix.OdinInspector.ReadOnly] public float Player_Satiety_Reduce_Rate = .005f;         // 玩家饱腹值减少速率
     
@@ -88,6 +89,9 @@ public class GameManager : MonoBehaviour
         //若此时玩家体力值大于上限，则将体力值设置为上限值
         if (Player_Stamina > Player_Stamina_Max) 
             Player_Stamina = Player_Stamina_Max;
+
+        if (Player_Stamina < 0)
+            Player_Stamina = 0;
     }
     
     public void Change_Player_Stamina_Max(float stamina_max_change_amount)      // 变更玩家体力上限
@@ -107,6 +111,12 @@ public class GameManager : MonoBehaviour
     public void Change_Player_Satiety(float satiety_change_amount)      // 变更玩家饱腹值（可输入负值）
     {
         Player_Satiety += satiety_change_amount;
+
+        if (Player_Satiety > Player_Satiety_Max)
+            Player_Satiety = Player_Satiety_Max;
+
+        if (Player_Satiety < Player_Satiety_Min)
+            Player_Satiety = Player_Satiety_Min;
     }
     
     
